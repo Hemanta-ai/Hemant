@@ -17,8 +17,9 @@ body {
 /* Header */
 header {
     display: flex;
-    justify-content: space-between;
-    padding: 1rem 2rem;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
     background: rgba(0, 0, 0, 0.7);
 }
 
@@ -28,36 +29,32 @@ header {
     color: #00FFFF;
     text-transform: uppercase;
     letter-spacing: 2px;
-    animation: logoMove 2s ease-out infinite;
+    margin-bottom: 1rem;
 }
 
+* Navbar */
 .navbar ul {
     display: flex;
-    gap: 1.5rem;
+    gap: 22px;
+    list-style-type: none; /* Removes bullets */
+    padding: 0;
+    margin: 0;
+}
+
+.navbar ul li {
+    display: inline-block;
 }
 
 .navbar ul li a {
     color: #fff;
     font-size: 1.2rem;
     text-transform: uppercase;
+    text-decoration: none; /* Removes underline */
     transition: color 0.3s ease;
 }
 
 .navbar ul li a:hover {
     color: #ffa500;
-}
-
-/* Header Animation */
-@keyframes logoMove {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.1);
-    }
-    100% {
-        transform: scale(1);
-    }
 }
 
 /* Hero Section */
@@ -112,9 +109,6 @@ header {
 .about {
     padding: 5rem 2rem;
     text-align: center;
-    border-radius: 10px;
-    max-width: 900px;
-    margin: auto;
     color: #fff;
 }
 
@@ -138,7 +132,7 @@ header {
 /* Social Media Icons */
 .social-media {
     display: flex;
-    justify-content: center; /* Center the icons */
+    justify-content: center;
     gap: 25px;
     margin-top: 30px;
 }
@@ -155,15 +149,7 @@ header {
 
 .social-media a:hover {
     transform: scale(1.2);
-    color: #FFD700; /* Golden color for hover */
-    box-shadow: 0 0 25px rgba(255, 255, 255, 0.4); /* Glowing effect */
-}
-
-
-
-.social-media a:hover {
-    transform: rotate(360deg) scale(1.3);
-    color: #ff4081;
+    color: #FFD700;
 }
 
 /* Contact Section */
@@ -185,6 +171,7 @@ header {
     margin-top: 0;
 }
 
+
 .contact-form-container table {
     width: 100%;
     border-collapse: collapse;
@@ -195,7 +182,6 @@ header {
     vertical-align: middle;
     text-align: left;
 }
-
 .input-field {
     width: 100%;
     padding: 12px;
@@ -230,25 +216,9 @@ header {
 }
 
 .submit-btn:active {
-transform: translateY(1px);
+    transform: translateY(1px);
 }
 
-/* Media Query for Smaller Screens */
-@media (max-width: 768px) {
-    .contact-heading {
-        font-size: 28px;
-    }
-
-    .input-field {
-        font-size: 16px;
-        padding: 10px;
-    }
-
-    .submit-btn {
-        font-size: 16px;
-        padding: 10px;
-    }
-}
 
 /* Footer */
 footer {
