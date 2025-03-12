@@ -32,7 +32,7 @@ header {
     margin-bottom: 1rem;
 }
 
-* Navbar */
+
 .navbar ul {
     display: flex;
     gap: 22px;
@@ -92,19 +92,6 @@ header {
     animation: pulse 3s infinite;
 }
 
-/* Hero Section Animation */
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.1);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
 /* About Section */
 .about {
     padding: 5rem 2rem;
@@ -152,88 +139,3 @@ header {
     color: #FFD700;
 }
 
-/* Contact Section */
-.contact {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 110vh;
-    background-color: #2a2a2a;
-    flex-direction: column;
-    text-align: center;
-}
-
-.contact-heading {
-    font-size: 36px;
-    font-weight: bold;
-    color: #FFD700;
-    margin-bottom: 20px;
-    margin-top: 0;
-}
-
-
-.contact-form-container table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.contact-form-container td {
-    padding: 12px;
-    vertical-align: middle;
-    text-align: left;
-}
-.input-field {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 18px;
-    background-color: transparent;
-    color: white;
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
-}
-
-.input-field:focus {
-    border-color: #28a745;
-    box-shadow: 0 0 10px rgba(40, 167, 69, 0.6);
-}
-
-.submit-btn {
-    width: 100%;
-    padding: 12px;
-    background-color: #28a745;
-    color: white;
-    font-size: 18px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s ease;
-}
-
-.submit-btn:hover {
-    background-color: #218838;
-    transform: translateY(-2px);
-}
-
-.submit-btn:active {
-    transform: translateY(1px);
-}
-
-
-/* Footer */
-footer {
-    background: #24243e;
-    padding: 2rem;
-    text-align: center;
-}
-
-.footer-social a {
-    margin: 0 15px;
-    color: #fff;
-    font-size: 2rem;
-    transition: transform 0.3s ease, color 0.3s ease;
-}
-
-.footer-social a:hover {
-    transform: rotate(360deg) scale(1.3);
-    color: #ff4081;
