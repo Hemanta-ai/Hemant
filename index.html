@@ -1,49 +1,461 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device- initial-scale=1.0">
-    <title></title>
-    <link rel="stylesheet" href="hee.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Notey's Honey Catcher Game - Hard Mode</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
+
+  html, body {
+    margin: 0; 
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(270deg, #ffecb3, #ffe0b2, #ffecb3);
+    background-size: 600% 600%;
+    animation: bgGradient 20s ease infinite;
+    font-family: 'Comic Neue', cursive, 'Comic Sans MS', cursive;
+    overflow: hidden;
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+  }
+
+  @keyframes bgGradient {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+  }
+
+  h1 {
+    margin: 1rem 0 0.5rem 0;
+    font-size: 3.5rem;
+    color: #b5651d;
+    text-shadow: 2px 2px 8px #fff2e6;
+    animation: fadeInDown 1s ease forwards;
+    opacity: 0;
+    text-align: center;
+  }
+
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  #gameCanvas {
+    background: #fff8dc;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+    animation: fadeIn 1.5s ease forwards;
+    opacity: 0;
+    width: 100vw;
+    max-width: 400px;
+    height: calc(100vw * 1.5); /* Maintain 400x600 aspect ratio */
+    max-height: 600px;
+    touch-action: none;
+  }
+
+  #scoreBoard, #timerDisplay {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 1.7rem;
+    color: #b5651d;
+    text-shadow: 1px 1px 3px #fff2e6;
+    animation: fadeIn 1.5s ease forwards;
+    opacity: 0;
+    user-select: none;
+  }
+
+  #totalPoints {
+    position: fixed;
+    right: 10px;
+    top: 70px;
+    background: rgba(181, 101, 29, 0.85);
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 1.3rem;
+    color: #fff8dc;
+    box-shadow: 0 0 15px #b5651dbb;
+    user-select: none;
+    animation: fadeIn 2s ease forwards;
+    opacity: 0;
+    max-width: 150px;
+    text-align: center;
+    z-index: 10;
+  }
+
+  #instructions {
+    max-width: 500px;
+    text-align: center;
+    margin: 1rem;
+    color: #7c4a00;
+    animation: fadeIn 2s ease forwards;
+    opacity: 0;
+    user-select: none;
+    padding: 0 10px;
+  }
+
+  #startBtn {
+    margin-top: 15px;
+    padding: 12px 26px;
+    background: #b5651d;
+    color: white;
+    font-weight: bold;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 5px 14px #b5651dcc;
+    user-select: none;
+    transition: background 0.3s ease;
+    animation: fadeIn 2.5s ease forwards;
+    opacity: 0;
+    max-width: 300px;
+    width: 90vw;
+    max-width: 300px;
+  }
+  #startBtn:hover {
+    background: #a45416;
+  }
+
+  /* Fade animations */
+  .fadeIn {
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+</style>
 </head>
 <body>
-    <header>
-        <div class="logo">HEMANT POKHREL</div>
-        <nav class="navbar">
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#about">About Me</a></li>
 
-            </ul>
-        </nav>
-    </header>
+<h1>Notey's Honey Catcher</h1>
+<div id="timerDisplay">Time Left: 02:00</div>
+<canvas id="gameCanvas" width="400" height="600"></canvas>
+<div id="scoreBoard">Points: 0</div>
+<div id="instructions">
+  Use Left and Right Arrow keys (or swipe on mobile) to move Notey and catch the honey drops! Catch the good honey, avoid spoiled honey. Bonus honey gives extra points! Good luck!
+</div>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Hello</h1>
-            <p> I am a student who enjoys a variety of activities, including playing, reading, and writing. I believe in continuous learning and enjoy participating in different experiences that enhance my knowledge. I am always eager to explore new ideas, challenge myself, and develop new skills. I value curiosity, creativity, and perseverance in my journey of personal and academic growth.</p>
-	</div>
-        
-    </section>
+<button id="startBtn">Start Game</button>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <h2>About Me</h2>
-        <div class="about-content">
-            <p>Hello! I'm <strong>Hemant Pokhrel</strong>, a passionate explorer of the digital world. With a deep curiosity for technology, gaming, and self-improvement, I’m constantly seeking new ways to expand my mind and skills. My journey has been one of both learning and practical application—whether diving into the world of gaming or tackling real-world challenges.</p>
-            <p>When I’m not gaming, you’ll find me immersed in reading, writing, and creatively expressing myself through various projects. Every new challenge is an opportunity for growth, and I thrive on pushing the limits of my creativity and capabilities.</p>
+<div id="totalPoints">Total Points: 0</div>
 
-            <!-- Social Media Links -->
-            <div class="social-media">
-                <a href="https://www.facebook.com/profile.php?id=100070802662055" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.instagram.com/hemant_pokharel25/" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://x.com/Hemant2062" target="_blank"><i class="fa-brands fa-square-x-twitter"></i></a>
-                <a href="https://t.me/hemantpokhrel25" target="_blank"><i class="fab fa-telegram"></i></a>
-            </div>
-        </div>
-    </section>
-	</body>
+<!-- Sound effects -->
+<audio id="catchSound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" preload="auto"></audio>
+<audio id="badCatchSound" src="https://actions.google.com/sounds/v1/cartoon/cartoon_boing.ogg" preload="auto"></audio>
+<audio id="bonusCatchSound" src="https://actions.google.com/sounds/v1/cartoon/concussive_hit_guitar_boing.ogg" preload="auto"></audio>
+<audio id="gameEndSound" src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg" preload="auto"></audio>
 
+<script>
+  const canvas = document.getElementById('gameCanvas');
+  const ctx = canvas.getContext('2d');
+  const scoreBoard = document.getElementById('scoreBoard');
+  const timerDisplay = document.getElementById('timerDisplay');
+  const startBtn = document.getElementById('startBtn');
+  const totalPointsEl = document.getElementById('totalPoints');
+  const catchSound = document.getElementById('catchSound');
+  const badCatchSound = document.getElementById('badCatchSound');
+  const bonusCatchSound = document.getElementById('bonusCatchSound');
+  const gameEndSound = document.getElementById('gameEndSound');
+
+  // Adjust canvas size dynamically for better crispness on high dpi
+  function resizeCanvas() {
+    const style = getComputedStyle(canvas);
+    const width = parseInt(style.getPropertyValue('width'));
+    const height = parseInt(style.getPropertyValue('height'));
+    if (canvas.width !== width || canvas.height !== height) {
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.scale(dpr, dpr);
+    }
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  const GAME_DURATION = 120; // seconds
+  const baseHoneyRadius = 15;
+
+  // Game state
+  let score = 0;
+  let totalPoints = Number(localStorage.getItem('notey_total_points')) || 0;
+  let gameSpeed = 2;
+  let honeyDrops = [];
+  let bear = {
+    x: 0, // will be set later
+    y: 0,
+    width: 100,
+    height: 100,
+    speed: 7,
+    dx: 0,
+    img: null
+  };
+  let keys = {};
+  let gameRunning = false;
+  let timeLeft = GAME_DURATION;
+  let honeyInterval = null;
+  let timerInterval = null;
+
+  // Load images
+  const bearImg = new Image();
+  bearImg.src = 'body.jfif';
+  bear.img = bearImg;
+  const honeyImg = new Image();
+  honeyImg.src = 'https://cdn-icons-png.flaticon.com/512/616/616408.png';
+
+  // Spoiled honey image (red cross)
+  const spoiledImg = new Image();
+  spoiledImg.src = 'https://cdn-icons-png.flaticon.com/512/1828/1828665.png';
+
+  // Bonus honey image (star)
+  const bonusImg = new Image();
+  bonusImg.src = 'https://cdn-icons-png.flaticon.com/512/1828/1828884.png';
+
+  // Controls
+  window.addEventListener('keydown', e => { keys[e.key] = true; });
+  window.addEventListener('keyup', e => { keys[e.key] = false; });
+
+  // Mobile swipe
+  let touchStartX = null;
+  window.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+  window.addEventListener('touchmove', e => {
+    if (touchStartX === null) return;
+    let touchCurrentX = e.touches[0].clientX;
+    let diff = touchCurrentX - touchStartX;
+    if (Math.abs(diff) > 10) {
+      bear.x += diff * 0.3;
+      if (bear.x < 0) bear.x = 0;
+      if (bear.x + bear.width > canvas.width) bear.x = canvas.width - bear.width;
+      touchStartX = touchCurrentX;
+    }
+  });
+  window.addEventListener('touchend', e => { touchStartX = null; });
+
+  // Honey types: normal = 0, spoiled = 1, bonus = 2
+  // Create honey drop with types and properties
+  function createHoney() {
+    if(!gameRunning) return;
+    const x = Math.random() * (canvas.width - baseHoneyRadius * 2) + baseHoneyRadius;
+    const rand = Math.random();
+    let type, img, radius, speed, zigzagSpeed, zigzagDir;
+    
+    if(rand < 0.7) {
+      type = 0; // normal honey 70%
+      img = honeyImg;
+      radius = baseHoneyRadius;
+      speed = gameSpeed + Math.random() * 0.5;
+      zigzagSpeed = 0;
+      zigzagDir = 0;
+    } else if(rand < 0.85) {
+      type = 1; // spoiled honey 15%
+      img = spoiledImg;
+      radius = baseHoneyRadius * 1.2;
+      speed = gameSpeed * 0.9 + Math.random() * 0.5;
+      zigzagSpeed = Math.random() * 1.2 + 0.5;
+      zigzagDir = Math.random() < 0.5 ? 1 : -1;
+    } else {
+      type = 2; // bonus honey 15%
+      img = bonusImg;
+      radius = baseHoneyRadius * 1.3;
+      speed = gameSpeed + 1 + Math.random() * 0.5;
+      zigzagSpeed = 0;
+      zigzagDir = 0;
+    }
+
+    honeyDrops.push({ x, y: -radius, radius, speed, type, img, zigzagSpeed, zigzagDir });
+  }
+
+  // Draw functions
+  function drawBear() { ctx.drawImage(bear.img, bear.x, bear.y, bear.width, bear.height); }
+  function drawHoney() {
+    honeyDrops.forEach(honey => {
+      ctx.drawImage(honey.img, honey.x - honey.radius, honey.y - honey.radius, honey.radius * 2, honey.radius * 2);
+    });
+  }
+
+  // Update game objects
+  function update() {
+    if(!gameRunning) return;
+    // Move bear
+    if (keys['ArrowLeft']) {
+      bear.x -= bear.speed;
+      if (bear.x < 0) bear.x = 0;
+    }
+    if (keys['ArrowRight']) {
+      bear.x += bear.speed;
+      if (bear.x + bear.width > canvas.width) bear.x = canvas.width - bear.width;
+    }
+
+    // Move honey drops down with zigzag if any
+    honeyDrops.forEach((honey, i) => {
+      honey.y += honey.speed;
+      if(honey.zigzagSpeed > 0){
+        honey.x += honey.zigzagSpeed * honey.zigzagDir;
+        // Change direction if hits sides
+        if(honey.x - honey.radius < 0 || honey.x + honey.radius > canvas.width){
+          honey.zigzagDir *= -1;
+        }
+      }
+
+      // Check collision with bear
+      if (
+        honey.y + honey.radius > bear.y &&
+        honey.x > bear.x &&
+        honey.x < bear.x + bear.width
+      ) {
+        if(honey.type === 0) {
+          score++;
+          catchSound.currentTime = 0;
+          catchSound.play();
+        } else if(honey.type === 1) {
+          score = Math.max(0, score - 2); // lose 2 points, minimum 0
+          badCatchSound.currentTime = 0;
+          badCatchSound.play();
+        } else if(honey.type === 2) {
+          score += 3;
+          bonusCatchSound.currentTime = 0;
+          bonusCatchSound.play();
+        }
+        honeyDrops.splice(i, 1);
+        updateScore();
+        // Speed up every 10 points
+        if(score % 10 === 0 && score !== 0){
+          gameSpeed += 0.4;
+        }
+      }
+
+      // Remove honey if off screen
+      if(honey.y - honey.radius > canvas.height){
+        honeyDrops.splice(i,1);
+      }
+    });
+  }
+
+  // Draw everything
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawBear();
+    drawHoney();
+  }
+
+  // Game loop
+  function loop() {
+    if(!gameRunning) return;
+    update();
+    draw();
+    requestAnimationFrame(loop);
+  }
+
+  // Timer
+  function startTimer(){
+    timeLeft = GAME_DURATION;
+    timerDisplay.textContent = formatTime(timeLeft);
+    timerInterval = setInterval(() => {
+      timeLeft--;
+      timerDisplay.textContent = formatTime(timeLeft);
+      if(timeLeft <= 0){
+        clearInterval(timerInterval);
+        endGame();
+      }
+    }, 1000);
+  }
+
+  function formatTime(seconds){
+    let m = Math.floor(seconds / 60);
+    let s = seconds % 60;
+    return `Time Left: ${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+  }
+
+  // Start game
+  function startGame(){
+    score = 0;
+    gameSpeed = 2;
+    honeyDrops = [];
+    bear.width = canvas.width / 4; // proportionally smaller on small screens
+    bear.height = bear.width * 1; // keep aspect ratio 1:1 for bear
+    bear.x = (canvas.width - bear.width) / 2;
+    bear.y = canvas.height - bear.height - 10;
+    gameRunning = true;
+    updateScore();
+    startTimer();
+
+    if(honeyInterval) clearInterval(honeyInterval);
+    honeyInterval = setInterval(createHoney, 600); // faster spawn for difficulty
+
+    startBtn.style.display = 'none';
+
+    canvas.classList.remove('fadeOut');
+    canvas.classList.add('fadeIn');
+    timerDisplay.classList.remove('fadeOut');
+    timerDisplay.classList.add('fadeIn');
+    scoreBoard.classList.remove('fadeOut');
+    scoreBoard.classList.add('fadeIn');
+    instructions.classList.remove('fadeOut');
+    instructions.classList.add('fadeIn');
+    totalPointsEl.classList.remove('fadeOut');
+    totalPointsEl.classList.add('fadeIn');
+
+    loop();
+  }
+
+  // Update score display
+  function updateScore(){
+    scoreBoard.textContent = `Points: ${score}`;
+    totalPointsEl.textContent = `Total Points: ${totalPoints}`;
+  }
+
+  // End game
+  function endGame(){
+    gameRunning = false;
+    clearInterval(honeyInterval);
+    updateScore();
+
+    // Add session score to total points and save
+    totalPoints += score;
+    localStorage.setItem('notey_total_points', totalPoints);
+
+    gameEndSound.play();
+
+    startBtn.textContent = 'Restart Game';
+    startBtn.style.display = 'inline-block';
+
+    // Fade animation out
+    canvas.classList.remove('fadeIn');
+    canvas.classList.add('fadeOut');
+    timerDisplay.classList.remove('fadeIn');
+    timerDisplay.classList.add('fadeOut');
+    scoreBoard.classList.remove('fadeIn');
+    scoreBoard.classList.add('fadeOut');
+    instructions.classList.remove('fadeIn');
+    instructions.classList.add('fadeOut');
+    totalPointsEl.classList.remove('fadeIn');
+    totalPointsEl.classList.add('fadeOut');
+  }
+
+  // Get instructions div for animation toggle
+  const instructions = document.getElementById('instructions');
+
+  // Initialize displays
+  timerDisplay.textContent = formatTime(GAME_DURATION);
+  updateScore();
+
+  // Draw initial bear when image loads
+  bearImg.onload = () => {
+    drawBear();
+  };
+
+  // Start button listener
+  startBtn.addEventListener('click', startGame);
+</script>
+
+</body>
 </html>
