@@ -37,7 +37,7 @@
     color: #b5651d;
     text-shadow: 2px 2px 8px #fff2e6;
     animation: fadeInDown 1s ease forwards;
-    opacity: 0;
+    opacity: 1; /* Set visible initially */
     text-align: center;
   }
 
@@ -56,8 +56,6 @@
     background: #fff8dc;
     border-radius: 20px;
     box-shadow: 0 8px 30px rgba(0,0,0,0.25);
-    animation: fadeIn 1.5s ease forwards;
-    opacity: 0;
     width: 400px;
     height: 600px;
     max-width: 100%;
@@ -72,9 +70,8 @@
     font-size: 1.7rem;
     color: #b5651d;
     text-shadow: 1px 1px 3px #fff2e6;
-    animation: fadeIn 1.5s ease forwards;
-    opacity: 0;
     user-select: none;
+    opacity: 1; /* Always visible */
   }
 
   #totalPoints {
@@ -89,11 +86,10 @@
     color: #fff8dc;
     box-shadow: 0 0 15px #b5651dbb;
     user-select: none;
-    animation: fadeIn 2s ease forwards;
-    opacity: 0;
     max-width: 150px;
     text-align: center;
     z-index: 10;
+    opacity: 1; /* Always visible */
   }
 
   #instructions {
@@ -101,10 +97,9 @@
     text-align: center;
     margin: 1rem;
     color: #7c4a00;
-    animation: fadeIn 2s ease forwards;
-    opacity: 0;
     user-select: none;
     padding: 0 10px;
+    opacity: 1; /* Always visible */
   }
 
   #startBtn {
@@ -118,11 +113,9 @@
     box-shadow: 0 5px 14px #b5651dcc;
     user-select: none;
     transition: background 0.3s ease;
-    animation: fadeIn 2.5s ease forwards;
-    opacity: 0;
     max-width: 300px;
     width: 90vw;
-    max-width: 300px;
+    display: inline-block;
   }
   #startBtn:hover {
     background: #a45416;
@@ -130,12 +123,20 @@
 
   /* Fade animations */
   .fadeIn {
-    animation-fill-mode: forwards;
+    animation: fadeIn 0.5s ease forwards;
+  }
+
+  .fadeOut {
+    animation: fadeOut 0.5s ease forwards;
   }
 
   @keyframes fadeIn {
     from {opacity: 0;}
     to {opacity: 1;}
+  }
+  @keyframes fadeOut {
+    from {opacity: 1;}
+    to {opacity: 0;}
   }
 </style>
 </head>
@@ -166,25 +167,11 @@
   const timerDisplay = document.getElementById('timerDisplay');
   const startBtn = document.getElementById('startBtn');
   const totalPointsEl = document.getElementById('totalPoints');
+  const instructions = document.getElementById('instructions');
   const catchSound = document.getElementById('catchSound');
   const badCatchSound = document.getElementById('badCatchSound');
   const bonusCatchSound = document.getElementById('bonusCatchSound');
   const gameEndSound = document.getElementById('gameEndSound');
-
-  // Adjust canvas size dynamically for better crispness on high dpi
-  function resizeCanvas() {
-    const style = getComputedStyle(canvas);
-    const width = parseInt(style.getPropertyValue('width'));
-    const height = parseInt(style.getPropertyValue('height'));
-    const dpr = window.devicePixelRatio || 1;
-    if(canvas.width !== width * dpr || canvas.height !== height * dpr){
-      canvas.width = width * dpr;
-      canvas.height = height * dpr;
-      ctx.scale(dpr, dpr);
-    }
-  }
-  window.addEventListener('resize', resizeCanvas);
-  resizeCanvas();
 
   const GAME_DURATION = 120; // seconds
   const baseHoneyRadius = 15;
@@ -195,7 +182,7 @@
   let gameSpeed = 2;
   let honeyDrops = [];
   let bear = {
-    x: 0, // will be set later
+    x: 0,
     y: 0,
     width: 100,
     height: 100,
@@ -211,16 +198,14 @@
 
   // Load images
   const bearImg = new Image();
-  bearImg.src = 'body.jfif';
+  bearImg.src = 'body.jfif';  // Make sure this image is available or use a placeholder
   bear.img = bearImg;
   const honeyImg = new Image();
   honeyImg.src = 'https://cdn-icons-png.flaticon.com/512/616/616408.png';
 
-  // Spoiled honey image (red cross)
   const spoiledImg = new Image();
   spoiledImg.src = 'https://cdn-icons-png.flaticon.com/512/1828/1828665.png';
 
-  // Bonus honey image (star)
   const bonusImg = new Image();
   bonusImg.src = 'https://cdn-icons-png.flaticon.com/512/1828/1828884.png';
 
@@ -245,7 +230,6 @@
   window.addEventListener('touchend', e => { touchStartX = null; });
 
   // Honey types: normal = 0, spoiled = 1, bonus = 2
-  // Create honey drop with types and properties
   function createHoney() {
     if(!gameRunning) return;
     const x = Math.random() * (canvas.width - baseHoneyRadius * 2) + baseHoneyRadius;
@@ -253,21 +237,21 @@
     let type, img, radius, speed, zigzagSpeed, zigzagDir;
     
     if(rand < 0.7) {
-      type = 0; // normal honey 70%
+      type = 0;
       img = honeyImg;
       radius = baseHoneyRadius;
       speed = gameSpeed + Math.random() * 0.5;
       zigzagSpeed = 0;
       zigzagDir = 0;
     } else if(rand < 0.85) {
-      type = 1; // spoiled honey 15%
+      type = 1;
       img = spoiledImg;
       radius = baseHoneyRadius * 1.2;
       speed = gameSpeed * 0.9 + Math.random() * 0.5;
       zigzagSpeed = Math.random() * 1.2 + 0.5;
       zigzagDir = Math.random() < 0.5 ? 1 : -1;
     } else {
-      type = 2; // bonus honey 15%
+      type = 2;
       img = bonusImg;
       radius = baseHoneyRadius * 1.3;
       speed = gameSpeed + 1 + Math.random() * 0.5;
@@ -278,7 +262,6 @@
     honeyDrops.push({ x, y: -radius, radius, speed, type, img, zigzagSpeed, zigzagDir });
   }
 
-  // Draw functions
   function drawBear() { ctx.drawImage(bear.img, bear.x, bear.y, bear.width, bear.height); }
   function drawHoney() {
     honeyDrops.forEach(honey => {
@@ -286,10 +269,9 @@
     });
   }
 
-  // Update game objects
   function update() {
     if(!gameRunning) return;
-    // Move bear
+
     if (keys['ArrowLeft']) {
       bear.x -= bear.speed;
       if (bear.x < 0) bear.x = 0;
@@ -299,18 +281,15 @@
       if (bear.x + bear.width > canvas.width) bear.x = canvas.width - bear.width;
     }
 
-    // Move honey drops down with zigzag if any
     honeyDrops.forEach((honey, i) => {
       honey.y += honey.speed;
       if(honey.zigzagSpeed > 0){
         honey.x += honey.zigzagSpeed * honey.zigzagDir;
-        // Change direction if hits sides
         if(honey.x - honey.radius < 0 || honey.x + honey.radius > canvas.width){
           honey.zigzagDir *= -1;
         }
       }
 
-      // Check collision with bear
       if (
         honey.y + honey.radius > bear.y &&
         honey.x > bear.x &&
@@ -321,7 +300,7 @@
           catchSound.currentTime = 0;
           catchSound.play();
         } else if(honey.type === 1) {
-          score = Math.max(0, score - 2); // lose 2 points, minimum 0
+          score = Math.max(0, score - 2);
           badCatchSound.currentTime = 0;
           badCatchSound.play();
         } else if(honey.type === 2) {
@@ -331,27 +310,23 @@
         }
         honeyDrops.splice(i, 1);
         updateScore();
-        // Speed up every 10 points
         if(score % 10 === 0 && score !== 0){
           gameSpeed += 0.4;
         }
       }
 
-      // Remove honey if off screen
       if(honey.y - honey.radius > canvas.height){
         honeyDrops.splice(i,1);
       }
     });
   }
 
-  // Draw everything
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawBear();
     drawHoney();
   }
 
-  // Game loop
   function loop() {
     if(!gameRunning) return;
     update();
@@ -359,7 +334,6 @@
     requestAnimationFrame(loop);
   }
 
-  // Timer
   function startTimer(){
     timeLeft = GAME_DURATION;
     timerDisplay.textContent = formatTime(timeLeft);
@@ -379,13 +353,12 @@
     return `Time Left: ${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
   }
 
-  // Start game
   function startGame(){
     score = 0;
     gameSpeed = 2;
     honeyDrops = [];
-    bear.width = canvas.width / 4; // proportionally smaller on small screens
-    bear.height = bear.width * 1; // keep aspect ratio 1:1 for bear
+    bear.width = canvas.width / 4;
+    bear.height = bear.width;
     bear.x = (canvas.width - bear.width) / 2;
     bear.y = canvas.height - bear.height - 10;
     gameRunning = true;
@@ -393,37 +366,23 @@
     startTimer();
 
     if(honeyInterval) clearInterval(honeyInterval);
-    honeyInterval = setInterval(createHoney, 600); // faster spawn for difficulty
+    honeyInterval = setInterval(createHoney, 600);
 
     startBtn.style.display = 'none';
-
-    canvas.classList.remove('fadeOut');
-    canvas.classList.add('fadeIn');
-    timerDisplay.classList.remove('fadeOut');
-    timerDisplay.classList.add('fadeIn');
-    scoreBoard.classList.remove('fadeOut');
-    scoreBoard.classList.add('fadeIn');
-    instructions.classList.remove('fadeOut');
-    instructions.classList.add('fadeIn');
-    totalPointsEl.classList.remove('fadeOut');
-    totalPointsEl.classList.add('fadeIn');
 
     loop();
   }
 
-  // Update score display
   function updateScore(){
     scoreBoard.textContent = `Points: ${score}`;
     totalPointsEl.textContent = `Total Points: ${totalPoints}`;
   }
 
-  // End game
   function endGame(){
     gameRunning = false;
     clearInterval(honeyInterval);
     updateScore();
 
-    // Add session score to total points and save
     totalPoints += score;
     localStorage.setItem('notey_total_points', totalPoints);
 
@@ -431,22 +390,7 @@
 
     startBtn.textContent = 'Restart Game';
     startBtn.style.display = 'inline-block';
-
-    // Fade animation out
-    canvas.classList.remove('fadeIn');
-    canvas.classList.add('fadeOut');
-    timerDisplay.classList.remove('fadeIn');
-    timerDisplay.classList.add('fadeOut');
-    scoreBoard.classList.remove('fadeIn');
-    scoreBoard.classList.add('fadeOut');
-    instructions.classList.remove('fadeIn');
-    instructions.classList.add('fadeOut');
-    totalPointsEl.classList.remove('fadeIn');
-    totalPointsEl.classList.add('fadeOut');
   }
-
-  // Get instructions div for animation toggle
-  const instructions = document.getElementById('instructions');
 
   // Initialize displays
   timerDisplay.textContent = formatTime(GAME_DURATION);
@@ -454,10 +398,13 @@
 
   // Draw initial bear when image loads
   bearImg.onload = () => {
+    bear.width = canvas.width / 4;
+    bear.height = bear.width;
+    bear.x = (canvas.width - bear.width) / 2;
+    bear.y = canvas.height - bear.height - 10;
     drawBear();
   };
 
-  // Start button listener
   startBtn.addEventListener('click', startGame);
 </script>
 
