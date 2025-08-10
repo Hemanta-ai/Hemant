@@ -1,135 +1,230 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Notey's Honey Catcher Game - Hard Mode</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Noteybear.com</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
-
-  html, body {
-    margin: 0; 
-    padding: 0;
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(270deg, #ffecb3, #ffe0b2, #ffecb3);
-    background-size: 600% 600%;
-    animation: bgGradient 20s ease infinite;
-    font-family: 'Comic Neue', cursive, 'Comic Sans MS', cursive;
-    overflow-x: hidden;
-    display: flex; 
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
+  /* General Styles */
+  body {
+    background: linear-gradient(135deg, #ffecb3, #ffe0b2);
+    font-family: 'Comic Sans MS', cursive, 'Comic Neue', cursive;
+    margin: 0;
     min-height: 100vh;
-    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    color: #4a3c00;
   }
 
-  @keyframes bgGradient {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
-  }
+  header {
+    background: #fcd34d;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgb(0 0 0 / 0.1);
+  } 
+  .hero img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 
-  h1 {
-    margin: 1rem 0 0.5rem 0;
-    font-size: 3.5rem;
+  header img {
+    width: 48px;
+    height: 48px;
+    margin-right: 0.75rem;
+    border-radius: 0.75rem;
+  }
+  header h1 {
+    font-weight: 700;
+    font-size: 1.5rem;
     color: #b5651d;
-    text-shadow: 2px 2px 8px #fff2e6;
-    animation: fadeInDown 1s ease forwards;
-    opacity: 1; /* Set visible initially */
+  }
+
+  .hero {
+    text-align: center;
+    padding: 3rem 1rem 2rem;
+  }
+  .hero img {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 9999px;
+    border: 4px solid #fcd34d;
+    box-shadow: 0 8px 20px rgba(181, 101, 29, 0.6);
+    animation: dance 1s infinite alternate ease-in-out;
+    object-fit: cover;
+  }
+  .hero h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-top: 1rem;
+    color: #b5651d;
+  }
+  .hero p {
+    font-size: 1.25rem;
+    margin-top: 0.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #7c4a00;
+  }
+  @keyframes dance {
+    0% { transform: rotate(-5deg) translateY(0); }
+    100% { transform: rotate(5deg) translateY(-5px); }
+  }
+
+  section {
+    max-width: 900px;
+    margin: 2rem auto;
+    background: rgba(255 255 255 / 0.8);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    color: #4a3c00;
+  }
+  section h3, section h4 {
+    color: #b5651d;
+    margin-bottom: 1rem;
+  }
+
+  #tokenomicsChart {
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  footer {
+    background: #fcd34d;
+    padding: 1rem 0 2rem;
     text-align: center;
   }
-
-  @keyframes fadeInDown {
-    from {
-      opacity: 0;
-      transform: translateY(-40px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
   }
-  
+  .social-icons a {
+    transition: transform 0.3s ease;
+  }
+  .social-icons a:hover {
+    transform: scale(1.2);
+  }
+  .social-icons svg {
+    width: 32px;
+    height: 32px;
+    fill: #555;
+  }
+  .social-icons a:hover svg {
+    fill: #ff8a65;
+  }
+  .social-icons img {
+    width: 32px;
+    height: 32px;
+  }
+
+  #gameSection {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 1rem 3rem;
+  }
+  #gameTitle {
+    font-size: 2.75rem;
+    font-weight: 700;
+    color: #b5651d;
+    margin-bottom: 0.25rem;
+    text-align: center;
+    text-shadow: 2px 2px 8px #fff2e6;
+  }
+  #timerDisplay, #scoreBoard, #totalPoints {
+    font-weight: bold;
+    font-size: 1.6rem;
+    color: #b5651d;
+    text-shadow: 1px 1px 3px #fff2e6;
+    user-select: none;
+  }
+  #timerDisplay {
+    margin-bottom: 0.5rem;
+  }
+  #scoreBoard {
+    margin-top: 0.5rem;
+  }
+  #totalPoints {
+    position: fixed;
+    right: 15px;
+    top: 75px;
+    background: rgba(181, 101, 29, 0.85);
+    padding: 10px 16px;
+    border-radius: 12px;
+    color: #fff8dc;
+    box-shadow: 0 0 15px #b5651dbb;
+    max-width: 150px;
+    text-align: center;
+    z-index: 20;
+  }
   #gameCanvas {
     background: #fff8dc;
     border-radius: 20px;
     box-shadow: 0 8px 30px rgba(0,0,0,0.25);
-    width: 400px;
-    height: 600px;
-    max-width: 100%;
-    display: block;
-    margin: 0 auto;
+    width: 100vw;
+    max-width: 400px;
+    height: calc(100vw * 1.5);
+    max-height: 600px;
     touch-action: none;
-  }
-
-  #scoreBoard, #timerDisplay {
-    margin-top: 10px;
-    font-weight: bold;
-    font-size: 1.7rem;
-    color: #b5651d;
-    text-shadow: 1px 1px 3px #fff2e6;
     user-select: none;
-    opacity: 1; /* Always visible */
+    margin: 1rem 0;
   }
-
-  #totalPoints {
-    position: fixed;
-    right: 10px;
-    top: 70px;
-    background: rgba(181, 101, 29, 0.85);
-    padding: 12px 18px;
-    border-radius: 12px;
-    font-weight: bold;
-    font-size: 1.3rem;
-    color: #fff8dc;
-    box-shadow: 0 0 15px #b5651dbb;
-    user-select: none;
-    max-width: 150px;
-    text-align: center;
-    z-index: 10;
-    opacity: 1; /* Always visible */
-  }
-
   #instructions {
-    max-width: 500px;
+    max-width: 400px;
     text-align: center;
-    margin: 1rem;
+    margin: 0.5rem 0 1.5rem 0;
     color: #7c4a00;
     user-select: none;
     padding: 0 10px;
-    opacity: 1; /* Always visible */
   }
-
   #startBtn {
-    margin-top: 15px;
-    padding: 12px 26px;
     background: #b5651d;
     color: white;
-    font-weight: bold;
+    font-weight: 700;
     border-radius: 12px;
+    padding: 12px 26px;
     cursor: pointer;
     box-shadow: 0 5px 14px #b5651dcc;
     user-select: none;
-    transition: background 0.3s ease;
     max-width: 300px;
     width: 90vw;
-    display: inline-block;
+    transition: background 0.3s ease;
   }
   #startBtn:hover {
     background: #a45416;
   }
 
-  /* Fade animations */
+  .page-switcher {
+    text-align: center;
+    margin-top: 1rem;
+  }
+  .page-switcher button {
+    background: transparent;
+    border: 2px solid #b5651d;
+    color: #b5651d;
+    font-weight: 700;
+    padding: 8px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  .page-switcher button:hover {
+    background: #b5651d;
+    color: white;
+  }
+
   .fadeIn {
-    animation: fadeIn 0.5s ease forwards;
+    animation: fadeIn 0.8s ease forwards;
   }
-
   .fadeOut {
-    animation: fadeOut 0.5s ease forwards;
+    animation: fadeOut 0.8s ease forwards;
   }
-
   @keyframes fadeIn {
     from {opacity: 0;}
     to {opacity: 1;}
@@ -138,45 +233,225 @@
     from {opacity: 1;}
     to {opacity: 0;}
   }
+
+  @media (min-width: 768px) {
+    #gameCanvas {
+      width: 400px;
+      height: 600px;
+    }
+  }
 </style>
 </head>
 <body>
 
-<h1>Notey's Honey Catcher</h1>
-<div id="timerDisplay">Time Left: 02:00</div>
-<canvas id="gameCanvas" width="400" height="600"></canvas>
-<div id="scoreBoard">Points: 0</div>
-<div id="instructions">
-  Use Left and Right Arrow keys (or swipe on mobile) to move Notey and catch the honey drops! Catch the good honey, avoid spoiled honey. Bonus honey gives extra points! Good luck!
-</div>
+<header>
+  <img src="logo.jpg" alt="Notey Logo" />
+  <h1>Notey Bear </h1>
+</header>
 
-<button id="startBtn">Start Game</button>
+<main class="flex-grow">
 
-<div id="totalPoints">Total Points: 0</div>
+  <section id="websiteSection" class="fadeIn">
+    <div class="hero">
+      <img src="body.jfif" alt="Notey Bear"</>
+      <h2>The Bear Coin in the Market</h2>
+      <p>Dance into the crypto world with Notey where fun meets fortune!</p>
+    </div>
 
-<!-- Sound effects -->
+    <section>
+      <h3>The Story of Notey Bear</h3>
+      <p>
+        Deep in the pixelated forest Notey the bear found a glowing coin under a honey tree.
+        Curious, he tapped it and coins burst into the air like golden pollen.
+        Soon, animals from all over joined in, tapping and laughing together.
+        The forest economy bloomed with fun and friendship at its core.
+        Notey decided to share the joy by creating his own coin Notey Coin.
+        Now, from forest to city, people trade Notey for laughs, memories, and sometimes snacks.
+        And every tap brings the world a little closer to happiness.
+      </p>
+    </section>
+
+    <section class="grid md:grid-cols-3 gap-6">
+      <div>
+        <h3>Catch and Earn</h3>
+        <p>Catch  dodge the spoiled drops, and rack up sweet rewards with every catch</p>
+      </div>
+      <div>
+        <h4>Community Powered</h4>
+        <p>Join a growing family of tappers and traders from every corner of the globe.</p>
+      </div>
+      <div>
+        <h4>Mission</h4>
+		<p> empower players worldwide by turning simple gameplay into rewarding </p>
+		
+      </div>
+    </section>
+<section style="max-width: 900px; margin: 2rem auto; background: rgba(255 255 255 / 0.85); border-radius: 1rem; padding: 2rem; box-shadow: 0 8px 30px rgba(0,0,0,0.1); color: #4a3c00;">
+  <h1 style="color: #b5651d; margin-bottom: 1.5rem; text-align:center;">Roadmap</h1>
+  
+  <div style="margin-bottom: 1.5rem;">
+    <h4 style="color: #b5651d; margin-bottom: 0.5rem;">Phase 1: Launch &amp; Foundation</h4>
+    <ul style="list-style-type: disc; padding-left: 1.25rem; color: #7c4a00;">
+      <li>Release initial Notey Honey Catcher game with basic gameplay and point system.</li>
+      <li>Integrate sound effects and animations for immersive play.</li>
+      <li>User-friendly UI with mobile-friendly controls.</li>
+      <li>Launch social media channels and build community.</li>
+    </ul>
+  </div>
+
+  <div style="margin-bottom: 1.5rem;">
+    <h4 style="color: #b5651d; margin-bottom: 0.5rem;">Phase 2: Rewards &amp; Economy</h4>
+    <ul style="list-style-type: disc; padding-left: 1.25rem; color: #7c4a00;">
+      <li>Introduce daily and weekly challenges.</li>
+      <li>Add leaderboard and player profiles.</li>
+      <li>Enable point conversion and Token Generation Event (TGE) </li>
+
+    </ul>
+  </div>
+
+  <div style="margin-bottom: 1.5rem;">
+    <h4 style="color: #b5651d; margin-bottom: 0.5rem;">Phase 3: Expansion &amp; Features</h4>
+    <ul style="list-style-type: disc; padding-left: 1.25rem; color: #7c4a00;">
+      <li>Launch multiplayer mode and cooperative events.</li>
+      <li>Add new collectibles and power-ups.</li>
+      <li>Expand reward catalog with NFTs and merchandise.</li>
+    </ul>
+  </div>
+
+  <div>
+    <h4 style="color: #b5651d; margin-bottom: 0.5rem;">Phase 4: Optimization &amp; Growth</h4>
+    <ul style="list-style-type: disc; padding-left: 1.25rem; color: #7c4a00;">
+      <li>Host tournaments and seasonal events.</li>
+      <li>Build community-driven features like guilds and chat.</li>
+      <li>Explore cross-platform availability play or App Store</li>
+    </ul>
+  </div>
+</section>
+
+    <section>
+      <h1 class="text-center">Tokenomics</h1>
+      <canvas id="tokenomicsChart" width="200" height="200"></canvas>
+    </section>
+
+    <div class="page-switcher">
+      <button id="toGameBtn" aria-label="Play Notey Honey Catcher Game">Play the Notey Catcher Game</button>
+    </div>
+  </section>
+
+  <section id="gameSection" class="flex flex-col items-center">
+    <h1 id="gameTitle">Notey Catcher Game</h1>
+    <div id="timerDisplay">Time Left: 02:00</div>
+    <canvas id="gameCanvas" width="400" height="600"></canvas>
+    <div id="scoreBoard">Points: 0</div>
+    <div id="instructions">
+      Use Left and Right Arrow keys (or swipe on mobile) to move Notey and catch the honey drops! Catch the good honey, avoid spoiled honey. Bonus honey gives extra points! Good luck!
+    </div>
+    <button id="startBtn">Start Game</button>
+    <div id="totalPoints">Total Points: 0</div>
+
+    <div class="page-switcher">
+      <button id="toWebsiteBtn" aria-label="Back to Notey Coin Website">Back to Website</button>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="social-icons">
+    <a href="https://t.me/Noteybear" target="_blank" aria-label="Telegram">
+      <svg viewBox="0 0 24 24" >
+        <path d="M9.04 16.47l-.39 5.51c.56 0 .8-.24 1.1-.53l2.63-2.51 5.45 4c1 .56 1.7.27 1.95-.92L22 4.57c.32-1.66-.6-2.32-1.7-1.93L2.6 10.94c-1.62.63-1.6 1.53-.28 1.95l5.72 1.78 13.28-8.4c.62-.39 1.18-.17.72.22L9.04 16.47z"/>
+      </svg>
+    </a>
+    <a href="https://x.com/NOTEYBEAR" target="_blank" aria-label="X (Twitter)">
+      <img src="x.png" alt="X Logo" />
+    </a>
+  </div>
+</footer>
+
 <audio id="catchSound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" preload="auto"></audio>
 <audio id="badCatchSound" src="https://actions.google.com/sounds/v1/cartoon/cartoon_boing.ogg" preload="auto"></audio>
 <audio id="bonusCatchSound" src="https://actions.google.com/sounds/v1/cartoon/concussive_hit_guitar_boing.ogg" preload="auto"></audio>
 <audio id="gameEndSound" src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg" preload="auto"></audio>
 
 <script>
+  // Tokenomics Pie Chart
+  const ctx = document.getElementById('tokenomicsChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: ['Community Rewards', 'Development', 'Marketing', 'Liquidity'],
+      datasets: [{
+        data: [40, 25, 20, 15],
+        backgroundColor: ['#FFD54F', '#FFB74D', '#FF8A65', '#81C784']
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: 'bottom' }
+      }
+    }
+  });
+</script>
+
+<script>
+  // Page Switching Logic
+  const websiteSection = document.getElementById('websiteSection');
+  const gameSection = document.getElementById('gameSection');
+  const toGameBtn = document.getElementById('toGameBtn');
+  const toWebsiteBtn = document.getElementById('toWebsiteBtn');
+
+  toGameBtn.addEventListener('click', () => {
+    websiteSection.classList.replace('fadeIn', 'fadeOut');
+    setTimeout(() => {
+      websiteSection.style.display = 'none';
+      gameSection.style.display = 'flex';
+      gameSection.classList.replace('fadeOut', 'fadeIn');
+      drawStartScreen(); // Draw initial start screen on canvas
+    }, 800);
+  });
+
+  toWebsiteBtn.addEventListener('click', () => {
+    gameSection.classList.replace('fadeIn', 'fadeOut');
+    setTimeout(() => {
+      gameSection.style.display = 'none';
+      websiteSection.style.display = 'block';
+      websiteSection.classList.replace('fadeOut', 'fadeIn');
+    }, 800);
+  });
+</script>
+
+<script>
+  // Notey Catcher Game Code
   const canvas = document.getElementById('gameCanvas');
-  const ctx = canvas.getContext('2d');
+  const ctx2 = canvas.getContext('2d');
   const scoreBoard = document.getElementById('scoreBoard');
   const timerDisplay = document.getElementById('timerDisplay');
   const startBtn = document.getElementById('startBtn');
   const totalPointsEl = document.getElementById('totalPoints');
-  const instructions = document.getElementById('instructions');
   const catchSound = document.getElementById('catchSound');
   const badCatchSound = document.getElementById('badCatchSound');
   const bonusCatchSound = document.getElementById('bonusCatchSound');
   const gameEndSound = document.getElementById('gameEndSound');
 
-  const GAME_DURATION = 120; // seconds
+  function resizeCanvas() {
+    const style = getComputedStyle(canvas);
+    const width = parseInt(style.getPropertyValue('width'));
+    const height = parseInt(style.getPropertyValue('height'));
+    if (canvas.width !== width || canvas.height !== height) {
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx2.scale(dpr, dpr);
+    }
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  const GAME_DURATION = 120;
   const baseHoneyRadius = 15;
 
-  // Game state
   let score = 0;
   let totalPoints = Number(localStorage.getItem('notey_total_points')) || 0;
   let gameSpeed = 2;
@@ -196,28 +471,25 @@
   let honeyInterval = null;
   let timerInterval = null;
 
-  // Load images
+  // Images
   const bearImg = new Image();
-  bearImg.src = 'body.jfif';  // Make sure this image is available or use a placeholder
+  bearImg.src = 'body.jfif';
   bear.img = bearImg;
   const honeyImg = new Image();
   honeyImg.src = 'https://cdn-icons-png.flaticon.com/512/616/616408.png';
-
   const spoiledImg = new Image();
   spoiledImg.src = 'https://cdn-icons-png.flaticon.com/512/1828/1828665.png';
-
   const bonusImg = new Image();
   bonusImg.src = 'https://cdn-icons-png.flaticon.com/512/1828/1828884.png';
 
   // Controls
-  window.addEventListener('keydown', e => { keys[e.key] = true; });
-  window.addEventListener('keyup', e => { keys[e.key] = false; });
+  window.addEventListener('keydown', e => { if(gameRunning) keys[e.key] = true; });
+  window.addEventListener('keyup', e => { if(gameRunning) keys[e.key] = false; });
 
-  // Mobile swipe
   let touchStartX = null;
-  window.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+  window.addEventListener('touchstart', e => { if(gameRunning) touchStartX = e.touches[0].clientX; });
   window.addEventListener('touchmove', e => {
-    if (touchStartX === null) return;
+    if(!gameRunning || touchStartX === null) return;
     let touchCurrentX = e.touches[0].clientX;
     let diff = touchCurrentX - touchStartX;
     if (Math.abs(diff) > 10) {
@@ -229,186 +501,178 @@
   });
   window.addEventListener('touchend', e => { touchStartX = null; });
 
-  // Honey types: normal = 0, spoiled = 1, bonus = 2
   function createHoney() {
-    if(!gameRunning) return;
-    const x = Math.random() * (canvas.width - baseHoneyRadius * 2) + baseHoneyRadius;
-    const rand = Math.random();
-    let type, img, radius, speed, zigzagSpeed, zigzagDir;
-    
-    if(rand < 0.7) {
-      type = 0;
-      img = honeyImg;
-      radius = baseHoneyRadius;
-      speed = gameSpeed + Math.random() * 0.5;
-      zigzagSpeed = 0;
-      zigzagDir = 0;
-    } else if(rand < 0.85) {
-      type = 1;
-      img = spoiledImg;
-      radius = baseHoneyRadius * 1.2;
-      speed = gameSpeed * 0.9 + Math.random() * 0.5;
-      zigzagSpeed = Math.random() * 1.2 + 0.5;
-      zigzagDir = Math.random() < 0.5 ? 1 : -1;
+    const typeProb = Math.random();
+    let type = 0;
+    if (typeProb > 0.85) type = 2;  // bonus honey 15%
+    else if (typeProb < 0.1) type = 1; // spoiled honey 15%
+    const x = Math.random() * (canvas.width - baseHoneyRadius * 2);
+    const speed = gameSpeed + Math.random() * 0.5;
+    return { x, y: baseHoneyRadius * 2, radius: baseHoneyRadius, speed, type };
+  }
+  
+
+  function drawBear() {
+    if (bear.img.complete) {
+      ctx2.drawImage(bear.img, bear.x, bear.y, bear.width, bear.height);
     } else {
-      type = 2;
-      img = bonusImg;
-      radius = baseHoneyRadius * 1.3;
-      speed = gameSpeed + 1 + Math.random() * 0.5;
-      zigzagSpeed = 0;
-      zigzagDir = 0;
+      ctx2.fillStyle = '#b5651d';
+      ctx2.fillRect(bear.x, bear.y, bear.width, bear.height);
     }
-
-    honeyDrops.push({ x, y: -radius, radius, speed, type, img, zigzagSpeed, zigzagDir });
   }
 
-  function drawBear() { ctx.drawImage(bear.img, bear.x, bear.y, bear.width, bear.height); }
-  function drawHoney() {
+  function drawHoney(honey) {
+    let imgToDraw = honeyImg;
+    if (honey.type === 1) imgToDraw = spoiledImg;
+    else if (honey.type === 2) imgToDraw = bonusImg;
+    if (imgToDraw.complete) {
+      ctx2.drawImage(imgToDraw, honey.x, honey.y, honey.radius * 2, honey.radius * 2);
+    } else {
+      ctx2.fillStyle = honey.type === 1 ? 'red' : (honey.type === 2 ? 'gold' : 'yellow');
+      ctx2.beginPath();
+      ctx2.arc(honey.x + honey.radius, honey.y + honey.radius, honey.radius, 0, Math.PI * 2);
+      ctx2.fill();
+    }
+  }
+
+  function updateBear() {
+    if (keys['ArrowLeft'] || keys['a']) {
+      bear.dx = -bear.speed;
+    } else if (keys['ArrowRight'] || keys['d']) {
+      bear.dx = bear.speed;
+    } else {
+      bear.dx = 0;
+    }
+    bear.x += bear.dx;
+    if (bear.x < 0) bear.x = 0;
+    if (bear.x + bear.width > canvas.width) bear.x = canvas.width - bear.width;
+  }
+
+  function updateHoney() {
     honeyDrops.forEach(honey => {
-      ctx.drawImage(honey.img, honey.x - honey.radius, honey.y - honey.radius, honey.radius * 2, honey.radius * 2);
-    });
-  }
-
-  function update() {
-    if(!gameRunning) return;
-
-    if (keys['ArrowLeft']) {
-      bear.x -= bear.speed;
-      if (bear.x < 0) bear.x = 0;
-    }
-    if (keys['ArrowRight']) {
-      bear.x += bear.speed;
-      if (bear.x + bear.width > canvas.width) bear.x = canvas.width - bear.width;
-    }
-
-    honeyDrops.forEach((honey, i) => {
       honey.y += honey.speed;
-      if(honey.zigzagSpeed > 0){
-        honey.x += honey.zigzagSpeed * honey.zigzagDir;
-        if(honey.x - honey.radius < 0 || honey.x + honey.radius > canvas.width){
-          honey.zigzagDir *= -1;
-        }
-      }
-
-      if (
-        honey.y + honey.radius > bear.y &&
-        honey.x > bear.x &&
-        honey.x < bear.x + bear.width
-      ) {
-        if(honey.type === 0) {
-          score++;
-          catchSound.currentTime = 0;
-          catchSound.play();
-        } else if(honey.type === 1) {
-          score = Math.max(0, score - 2);
-          badCatchSound.currentTime = 0;
-          badCatchSound.play();
-        } else if(honey.type === 2) {
-          score += 3;
-          bonusCatchSound.currentTime = 0;
-          bonusCatchSound.play();
-        }
-        honeyDrops.splice(i, 1);
-        updateScore();
-        if(score % 10 === 0 && score !== 0){
-          gameSpeed += 0.4;
-        }
-      }
-
-      if(honey.y - honey.radius > canvas.height){
-        honeyDrops.splice(i,1);
-      }
     });
+    honeyDrops = honeyDrops.filter(honey => honey.y < canvas.height + honey.radius);
+  }
+function playSound(audioElement) {
+  const soundClone = audioElement.cloneNode();
+  soundClone.play();
+}
+
+  function checkCollision() {
+    for (let i = honeyDrops.length - 1; i >= 0; i--) {
+      let h = honeyDrops[i];
+      if (
+        h.x + h.radius * 2 > bear.x &&
+        h.x < bear.x + bear.width &&
+        h.y + h.radius * 2 > bear.y &&
+        h.y < bear.y + bear.height
+      ) {
+     if   (h.type === 0) {
+    score += 1;
+    playSound(catchSound);
+    } else if (h.type === 1) {
+     score -= 3;
+    playSound(badCatchSound);
+    if (score < 0) score = 0;
+   } else if (h.type === 2) {
+    score += 5;
+    playSound(bonusCatchSound);
+}
+
+        honeyDrops.splice(i, 1);
+      }
+    }
   }
 
   function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx2.clearRect(0, 0, canvas.width, canvas.height);
     drawBear();
-    drawHoney();
+    honeyDrops.forEach(drawHoney);
   }
 
-  function loop() {
-    if(!gameRunning) return;
-    update();
-    draw();
-    requestAnimationFrame(loop);
-  }
-
-  function startTimer(){
-    timeLeft = GAME_DURATION;
-    timerDisplay.textContent = formatTime(timeLeft);
-    timerInterval = setInterval(() => {
-      timeLeft--;
-      timerDisplay.textContent = formatTime(timeLeft);
-      if(timeLeft <= 0){
-        clearInterval(timerInterval);
-        endGame();
-      }
-    }, 1000);
-  }
-
-  function formatTime(seconds){
-    let m = Math.floor(seconds / 60);
-    let s = seconds % 60;
-    return `Time Left: ${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
-  }
-
-  function startGame(){
-    score = 0;
-    gameSpeed = 2;
-    honeyDrops = [];
-    bear.width = canvas.width / 4;
-    bear.height = bear.width;
-    bear.x = (canvas.width - bear.width) / 2;
-    bear.y = canvas.height - bear.height - 10;
-    gameRunning = true;
-    updateScore();
-    startTimer();
-
-    if(honeyInterval) clearInterval(honeyInterval);
-    honeyInterval = setInterval(createHoney, 600);
-
-    startBtn.style.display = 'none';
-
-    loop();
-  }
-
-  function updateScore(){
+  function updateUI() {
     scoreBoard.textContent = `Points: ${score}`;
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+    timerDisplay.textContent = `Time Left: ${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
     totalPointsEl.textContent = `Total Points: ${totalPoints}`;
   }
 
-  function endGame(){
-    gameRunning = false;
-    clearInterval(honeyInterval);
-    updateScore();
-
-    totalPoints += score;
-    localStorage.setItem('notey_total_points', totalPoints);
-
-    gameEndSound.play();
-
-    startBtn.textContent = 'Restart Game';
-    startBtn.style.display = 'inline-block';
+  function gameLoop() {
+    if (!gameRunning) return;
+    updateBear();
+    updateHoney();
+    checkCollision();
+    draw();
+    updateUI();
+    requestAnimationFrame(gameLoop);
   }
 
-  // Initialize displays
-  timerDisplay.textContent = formatTime(GAME_DURATION);
-  updateScore();
-
-  // Draw initial bear when image loads
-  bearImg.onload = () => {
-    bear.width = canvas.width / 4;
-    bear.height = bear.width;
+  function startGame() {
+    if (gameRunning) return;
+    score = 0;
+    timeLeft = GAME_DURATION;
+    honeyDrops = [];
     bear.x = (canvas.width - bear.width) / 2;
     bear.y = canvas.height - bear.height - 10;
-    drawBear();
-  };
+    gameSpeed = 2;
+    gameRunning = true;
+    startBtn.disabled = true;
+    updateUI();
+
+    honeyInterval = setInterval(() => {
+      honeyDrops.push(createHoney());
+    }, 900);
+
+    timerInterval = setInterval(() => {
+      timeLeft--;
+      if (timeLeft <= 0) {
+        endGame();
+      }
+    }, 1000);
+
+    gameLoop();
+  }
+
+  function endGame() {
+    gameRunning = false;
+    clearInterval(honeyInterval);
+    clearInterval(timerInterval);
+    gameEndSound.play();
+
+    totalPoints += score;
+    if (totalPoints < 0) totalPoints = 0;
+    localStorage.setItem('notey_total_points', totalPoints);
+    updateUI();
+
+    alert(`Game Over! Your score: ${score}. Total Points: ${totalPoints}`);
+
+    startBtn.disabled = false;
+    drawStartScreen();
+  }
+
+  // Draw start screen message on canvas before starting game
+  function drawStartScreen() {
+    ctx2.clearRect(0, 0, canvas.width, canvas.height);
+    ctx2.fillStyle = '#b5651d';
+    ctx2.font = '28px Comic Sans MS, cursive';
+    ctx2.textAlign = 'center';
+    ctx2.textBaseline = 'middle';
+    ctx2.fillText('Press "Start Game" to Play!', canvas.width/2, canvas.height/2);
+    // Draw bear under text
+    if (bear.img.complete) {
+      ctx2.drawImage(bear.img, (canvas.width - bear.width)/2, canvas.height/2 + 40, bear.width, bear.height);
+    }
+  }
 
   startBtn.addEventListener('click', startGame);
+
+  // On initial load on game page show start screen
+  if (gameSection.style.display === 'flex') {
+    drawStartScreen();
+  }
 </script>
 
 </body>
 </html>
-
-
