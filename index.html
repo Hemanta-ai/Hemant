@@ -1,0 +1,272 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>4picsintro – CapCut Editing Template (Next‑Level)</title>
+  <meta name="description" content="Use this CapCut editing template. Preview the style, see steps, and tap to open directly in CapCut (app or web)." />
+  <meta property="og:title" content="CapCut Editing Template – Free Use" />
+  <meta property="og:description" content="Preview and use this CapCut template in one tap. Works on mobile and desktop." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="COVER_IMAGE.jpg" />
+  <meta name="theme-color" content="#0ea5e9" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html { scroll-behavior:smooth }
+    body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji" }
+    /* Before/After slider */
+    .ba-wrap { position: relative; overflow: hidden; border-radius: 1rem }
+    .ba-img { display:block; width:100%; height:auto }
+    .ba-top { position:absolute; inset:0; width:50%; overflow:hidden }
+    .ba-handle { position:absolute; top:0; bottom:0; left:calc(50% - 1px); width:2px; background:white; box-shadow: 0 0 0 1px rgba(0,0,0,.15) }
+    .ba-dot { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:38px; height:38px; border-radius:9999px; background:white; box-shadow:0 10px 20px rgba(0,0,0,.2) }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100">
+  <!-- Hero -->
+  <header class="relative isolate overflow-hidden">
+    <div class="absolute inset-0 -z-10 bg-[radial-gradient(1200px_600px_at_50%_-100px,rgba(56,189,248,.35),transparent)]"></div>
+    <div class="max-w-6xl mx-auto px-4 py-14 md:py-20">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          $1CapCut Template • 4picsintro$2
+          <h1 class="mt-4 text-4xl md:text-6xl font-extrabold leading-tight">
+            Make your edit in <span class="text-sky-400">one tap</span>
+          </h1>
+          <p class="mt-4 text-slate-300 max-w-prose">Preview the style below, then open it directly in CapCut. Works on iOS, Android, and web. Replace the placeholders with your clips in seconds.</p><div class="mt-6 flex flex-wrap gap-3">
+        <a id="useTemplateBtn" href="#" class="group inline-flex items-center gap-2 rounded-2xl bg-sky-500 hover:bg-sky-400 text-slate-900 font-semibold px-5 py-3 transition">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M3 5a2 2 0 0 1 2-2h7a1 1 0 1 1 0 2H5v14h14v-7a1 1 0 1 1 2 0v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5Z"/><path d="M21 3a1 1 0 0 0-1-1h-6a1 1 0 1 0 0 2h3.586L9.293 11.293a1 1 0 1 0 1.414 1.414L19 5.414V9a1 1 0 1 0 2 0V3Z"/></svg>
+          Use template</a>
+        <button id="openAppBtn" class="inline-flex items-center gap-2 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/10 font-semibold px-5 py-3">
+          Open in CapCut app
+        </button>
+        <button id="copyLinkBtn" class="inline-flex items-center gap-2 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/10 font-medium px-5 py-3">Copy link</button>
+      </div>
+
+      <div id="copiedToast" class="hidden mt-3 text-sm text-emerald-300">Link copied! Share it with your friends ✨</div>
+
+      <div class="mt-6 flex items-center gap-4 text-xs text-slate-400">
+        <div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> Mobile & desktop</div>
+        <div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-sky-400"></span> 4K ready</div>
+        <div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-fuchsia-400"></span> Free to use</div>
+      </div>
+    </div>
+
+    <!-- Video preview card -->
+    <div class="bg-white/5 border border-white/10 rounded-3xl p-3 md:p-4 shadow-2xl">
+      <div class="aspect-[9/16] rounded-2xl overflow-hidden relative">
+        <video id="preview" class="w-full h-full object-cover" poster="VIDEO_POSTER.jpg" preload="metadata" playsinline>
+          <source src="PREVIEW_VIDEO.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <button id="playBtn" class="absolute inset-0 grid place-items-center group">
+          <span class="inline-grid place-items-center w-16 h-16 rounded-full bg-white/20 backdrop-blur ring-1 ring-white/30 group-hover:scale-105 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="w-7 h-7"><path d="M8 5v14l11-7L8 5z"/></svg>
+          </span>
+        </button>
+      </div>
+      <div class="px-2 pt-3">
+        <div class="flex items-center justify-between text-xs text-slate-400">
+          <span>Preview • 9:16</span>
+          <a href="#how" class="hover:text-sky-300">How it works</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>  <!-- Highlights -->  <section class="max-w-6xl mx-auto px-4 py-12" id="features">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="rounded-2xl bg-white/5 border border-white/10 p-5">
+        <h3 class="font-semibold">Auto-beat sync</h3>
+        <p class="mt-2 text-sm text-slate-300">Clips snap to the music markers for smooth rhythm transitions.</p>
+      </div>
+      <div class="rounded-2xl bg-white/5 border border-white/10 p-5">
+        <h3 class="font-semibold">Text presets</h3>
+        <p class="mt-2 text-sm text-slate-300">Bold captions with shadows and gradient fills—just edit the text.</p>
+      </div>
+      <div class="rounded-2xl bg-white/5 border border-white/10 p-5">
+        <h3 class="font-semibold">Color look</h3>
+        <p class="mt-2 text-sm text-slate-300">Warm cinematic LUT baked in; adjustable intensity slider.</p>
+      </div>
+      <div class="rounded-2xl bg-white/5 border border-white/10 p-5">
+        <h3 class="font-semibold">Export presets</h3>
+        <p class="mt-2 text-sm text-slate-300">1080p and 4K profiles with high bitrate and frame blending.</p>
+      </div>
+    </div>
+  </section>  <!-- Before/After -->  <section class="max-w-6xl mx-auto px-4 py-12">
+    <div class="grid md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h2 class="text-2xl md:text-3xl font-bold">Style preview: before / after</h2>
+        <p class="mt-2 text-slate-300">Drag the handle to compare the raw clip with the graded, motion-blurred output you'll get from this template.</p>
+      </div>
+      <div class="ba-wrap shadow-xl">
+        <img src="before.jpg" alt="Before" class="ba-img" loading="lazy">
+        <div id="baTop" class="ba-top">
+          <img src="after.jpg" alt="After" class="ba-img" loading="lazy">
+        </div>
+        <div class="ba-handle"></div>
+        <div class="ba-dot"></div>
+        <input id="baRange" type="range" min="0" max="100" value="50" class="absolute bottom-3 left-1/2 -translate-x-1/2 w-[80%] h-1 bg-white/20 accent-sky-400 rounded-full" aria-label="Before/after slider"/>
+      </div>
+    </div>
+  </section>  <!-- How it works -->  <section id="how" class="max-w-6xl mx-auto px-4 py-12">
+    <h2 class="text-2xl md:text-3xl font-bold">How to use</h2>
+    <ol class="mt-6 space-y-4">
+      <li class="flex gap-3">
+        <span class="flex-none w-8 h-8 rounded-full bg-sky-500 text-slate-900 grid place-items-center font-bold">1</span>
+        <div>
+          <p class="font-semibold">Tap <em>Use template</em>.</p>
+          <p class="text-slate-300 text-sm">On mobile it opens the CapCut app. On desktop it opens CapCut web.</p>
+        </div>
+      </li>
+      <li class="flex gap-3">
+        <span class="flex-none w-8 h-8 rounded-full bg-sky-500 text-slate-900 grid place-items-center font-bold">2</span>
+        <div>
+          <p class="font-semibold">Replace placeholders with your clips/photos.</p>
+          <p class="text-slate-300 text-sm">Keep similar durations for best beat sync.</p>
+        </div>
+      </li>
+      <li class="flex gap-3">
+        <span class="flex-none w-8 h-8 rounded-full bg-sky-500 text-slate-900 grid place-items-center font-bold">3</span>
+        <div>
+          <p class="font-semibold">Export in 1080p or 4K and post.</p>
+          <p class="text-slate-300 text-sm">Use the tags below to get featured.</p>
+        </div>
+      </li>
+    </ol><div class="mt-8 grid md:grid-cols-2 gap-6">
+  <div class="rounded-2xl bg-white/5 border border-white/10 p-4">
+    <h3 class="font-semibold">Template info</h3>
+    <dl class="mt-3 grid grid-cols-2 gap-2 text-sm text-slate-300">
+      <div><dt class="text-slate-400">Aspect</dt><dd>9:16 (vertical)</dd></div>
+      $1 4 $3
+      <div><dt class="text-slate-400">Music</dt><dd id="musicCredit">MUSIC_TITLE – ARTIST</dd></div>
+      <div><dt class="text-slate-400">Effects</dt><dd>Beat cuts, Motion blur, Film grain</dd></div>
+    </dl>
+  </div>
+  <div class="rounded-2xl bg-white/5 border border-white/10 p-4">
+    <h3 class="font-semibold">Hashtags</h3>
+    <div id="tags" class="mt-3 flex flex-wrap gap-2 text-xs">
+      <span class="px-3 py-1 rounded-full bg-white/10 border border-white/10">#CapCut</span>
+      <span class="px-3 py-1 rounded-full bg-white/10 border border-white/10">#Template</span>
+      <span class="px-3 py-1 rounded-full bg-white/10 border border-white/10">#Edit</span>
+      <span class="px-3 py-1 rounded-full bg-white/10 border border-white/10">#Viral</span>
+    </div>
+  </div>
+</div>
+
+  </section>  <!-- Gallery -->  <section class="max-w-6xl mx-auto px-4 py-12">
+    <h2 class="text-2xl md:text-3xl font-bold">Example looks</h2>
+    <div class="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
+      <img class="rounded-xl aspect-square object-cover" src="thumb1.jpg" alt="Example 1" loading="lazy" />
+      <img class="rounded-xl aspect-square object-cover" src="thumb2.jpg" alt="Example 2" loading="lazy" />
+      <img class="rounded-xl aspect-square object-cover" src="thumb3.jpg" alt="Example 3" loading="lazy" />
+      <img class="rounded-xl aspect-square object-cover" src="thumb4.jpg" alt="Example 4" loading="lazy" />
+      <img class="rounded-xl aspect-square object-cover" src="thumb5.jpg" alt="Example 5" loading="lazy" />
+      <img class="rounded-xl aspect-square object-cover" src="thumb6.jpg" alt="Example 6" loading="lazy" />
+    </div>
+  </section>  <!-- FAQ -->  <section class="max-w-6xl mx-auto px-4 py-12">
+    <h2 class="text-2xl md:text-3xl font-bold">FAQ</h2>
+    <div class="mt-6 space-y-4">
+      <details class="rounded-xl bg-white/5 border border-white/10 p-4">
+        <summary class="font-semibold cursor-pointer">It says “Template not found”.</summary>
+        <p class="mt-2 text-sm text-slate-300">The link may be private or expired. Ask the creator for a fresh link or try again later.</p>
+      </details>
+      <details class="rounded-xl bg-white/5 border border-white/10 p-4">
+        <summary class="font-semibold cursor-pointer">The app didn’t open on my phone.</summary>
+        <p class="mt-2 text-sm text-slate-300">Tap <em>Open in CapCut app</em>. If it still doesn’t open, update CapCut from the App Store / Play Store and try again.</p>
+      </details>
+      <details class="rounded-xl bg-white/5 border border-white/10 p-4">
+        <summary class="font-semibold cursor-pointer">Can I change the music?</summary>
+        <p class="mt-2 text-sm text-slate-300">Yes—swap music in CapCut and re-align the beat markers. Make sure you have rights to use the track.</p>
+      </details>
+    </div>
+  </section>  <!-- Sticky CTA -->  <div class="sticky bottom-3 z-50">
+    <div class="max-w-fit mx-auto">
+      <a id="useTemplateBtn2" href="#" class="inline-flex items-center gap-2 rounded-full px-6 py-3 bg-sky-500 text-slate-900 font-semibold shadow-xl hover:bg-sky-400 border border-sky-300/50">
+        Use this CapCut template
+      </a>
+    </div>
+  </div>  <footer class="max-w-6xl mx-auto px-4 py-12 text-sm text-slate-400">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div>
+        <p>Made with ❤ for editors. Replace placeholders with your assets.</p>
+        <p class="mt-1">Music credit: <span id="musicCredit2">MUSIC_TITLE – ARTIST</span></p>
+      </div>
+      <div class="flex items-center gap-3">
+        <img class="w-24 h-24 bg-white rounded-xl p-2" alt="QR to template" id="qrImg" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=CAPCUT_TEMPLATE_LINK"/>
+      </div>
+    </div>
+  </footer>  <script>
+    // ======= CONFIG – Replace these with your real links & info =======
+    const CAPCUT_WEB_LINK = 'https://www.capcut.com/tv2/ZSS329UFy/'; // public template URL
+    const CAPCUT_DEEP_LINK = 'https://www.capcut.com/tv2/ZSS329UFy/'; // deep link for app
+    const MUSIC_TITLE = '4picsintro – CapCut Template';
+    const HASHTAGS = ['#CapCut', '#CapCutTemplate', '#4picsintro', '#Edit', '#Viral'];
+    // ================================================================
+
+    // Set dynamic content
+    const useBtns = [document.getElementById('useTemplateBtn'), document.getElementById('useTemplateBtn2')];
+    useBtns.forEach(btn => btn.setAttribute('href', CAPCUT_WEB_LINK));
+
+    document.getElementById('openAppBtn').addEventListener('click', () => {
+      // Try deep link first; if it fails (desktop), fall back to web
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      if (isMobile) {
+        window.location.href = CAPCUT_DEEP_LINK;
+        setTimeout(() => { window.location.href = CAPCUT_WEB_LINK; }, 900);
+      } else {
+        window.location.href = CAPCUT_WEB_LINK;
+      }
+    });
+
+    document.getElementById('copyLinkBtn').addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(CAPCUT_WEB_LINK);
+        document.getElementById('copiedToast').classList.remove('hidden');
+        setTimeout(()=>document.getElementById('copiedToast').classList.add('hidden'), 2200);
+      } catch (e) { alert('Copy failed. Link: '+ CAPCUT_WEB_LINK); }
+    });
+
+    // Music & tags
+    document.getElementById('musicCredit').textContent = MUSIC_TITLE;
+    document.getElementById('musicCredit2').textContent = MUSIC_TITLE;
+    const tagsWrap = document.getElementById('tags');
+    tagsWrap.innerHTML = '';
+    HASHTAGS.forEach(t => {
+      const span = document.createElement('span');
+      span.className = 'px-3 py-1 rounded-full bg-white/10 border border-white/10';
+      span.textContent = t;
+      tagsWrap.appendChild(span);
+    });
+
+    // Update QR
+    const qr = document.getElementById('qrImg');
+    qr.src = https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(CAPCUT_WEB_LINK)};
+
+    // Video play overlay
+    const video = document.getElementById('preview');
+    const playBtn = document.getElementById('playBtn');
+    playBtn.addEventListener('click', () => { video.play(); playBtn.classList.add('hidden'); });
+    video.addEventListener('pause', () => playBtn.classList.remove('hidden'));
+
+    // Before/After slider logic
+    const baTop = document.getElementById('baTop');
+    const baRange = document.getElementById('baRange');
+    const updateBA = () => {
+      const pct = +baRange.value; // 0..100
+      baTop.style.width = pct + '%';
+    };
+    baRange.addEventListener('input', updateBA);
+    updateBA();
+
+    // Accessibility: keyboard toggle for play
+    video.addEventListener('click', ()=> video.paused ? video.play() : video.pause());
+  </script></body>
+</html>
+Sent
+Write to Hemant Pokhrel
