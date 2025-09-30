@@ -1,271 +1,380 @@
-<!doctype html>
-
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>4picsintro – CapCut Editing Template (Next‑Level)</title>
-  <meta name="description" content="Use this CapCut editing template. Preview the style, see steps, and tap to open directly in CapCut (app or web)." />
-  <meta property="og:title" content="CapCut Editing Template – Free Use" />
-  <meta property="og:description" content="Preview and use this CapCut template in one tap. Works on mobile and desktop." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="COVER_IMAGE.jpg" />
-  <meta name="theme-color" content="#0ea5e9" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    html { scroll-behavior:smooth }
-    body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji" }
-    /* Before/After slider */
-    .ba-wrap { position: relative; overflow: hidden; border-radius: 1rem }
-    .ba-img { display:block; width:100%; height:auto }
-    .ba-top { position:absolute; inset:0; width:50%; overflow:hidden }
-    .ba-handle { position:absolute; top:0; bottom:0; left:calc(50% - 1px); width:2px; background:white; box-shadow: 0 0 0 1px rgba(0,0,0,.15) }
-    .ba-dot { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:38px; height:38px; border-radius:9999px; background:white; box-shadow:0 10px 20px rgba(0,0,0,.2) }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>NoteyBearSol.com</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#000;
+    --card:#0b0b0d;
+    --muted:#9ca3af;
+    --accent:#f97316;
+    --accent-2:#ffb454;
+    --glass: rgba(255,255,255,0.04);
+    --maxw:1200px;
+    font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;background:var(--bg);color:#eef2f8;
+    -webkit-font-smoothing:antialiased;padding-bottom:40px;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:22px;}
+  header{position:sticky;top:0;z-index:60;background:linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.2));backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,0.03)}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:12px 6px;gap:12px}
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+  .logo{
+    width:48px;height:48px;border-radius:12px;
+    display:grid;place-items:center;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(249,115,22,0.15);
+  }
+  .logo img{width:100%;height:100%;object-fit:cover;border-radius:12px}
+  nav ul{display:flex;gap:18px;align-items:center;margin:0;padding:0;list-style:none}
+  nav a{color:inherit;text-decoration:none;font-weight:600;opacity:0.95}
+  .btn{background:linear-gradient(90deg,var(--accent),var(--accent-2));padding:10px 16px;border-radius:12px;color:#050505;font-weight:800;text-decoration:none;box-shadow:0 10px 30px rgba(245,158,11,0.12)}
+  .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--accent);padding:9px 14px}
+  /* HERO */
+  .hero{display:grid;grid-template-columns:1fr 480px;gap:28px;align-items:center;padding:48px 0;position:relative;overflow:hidden}
+  .hero-left h1{font-size:44px;margin:0;line-height:1;color:#fff}
+  .lead{margin-top:12px;color:var(--muted);max-width:56ch}
+  .cta-row{margin-top:24px;display:flex;gap:12px;align-items:center}
+  .cards{display:flex;gap:12px;margin-top:26px}
+  .card{background:linear-gradient(180deg,#070708, #0c0c0d);padding:14px;border-radius:12px;min-width:120px;text-align:center;border:1px solid rgba(255,255,255,0.03)}
+  .card .label{font-size:12px;color:var(--muted)}
+  .card .value{font-weight:800;margin-top:6px}
+  /* right hero visual */
+  .hero-right{position:relative;display:flex;align-items:center;justify-content:center}
+  .scene{
+    width:420px;height:420px;border-radius:20px;background:
+      radial-gradient(ellipse at 30% 20%, rgba(255,130,30,0.06), transparent 20%),
+      linear-gradient(180deg,#080808,#0b0b0c);
+    border:1px solid rgba(255,255,255,0.04);
+    display:grid;place-items:center;overflow:visible;box-shadow:0 30px 80px rgba(0,0,0,0.65);
+  }
+  .coin-wrap{width:260px;height:260px;transform-style:preserve-3d;animation:coin-tilt 6s ease-in-out infinite}
+  .coin{width:100%;height:100%;border-radius:50%;background:conic-gradient(from 90deg,#111, #0d0d0d 30%, #111 60%);display:grid;place-items:center;box-shadow:inset 0 -18px 50px rgba(0,0,0,0.6),0 18px 40px rgba(249,115,22,0.06)}
+  .coin img{width:78%;height:78%;object-fit:contain;border-radius:50%}
+  .halo{position:absolute;width:520px;height:520px;border-radius:50%;filter:blur(46px);opacity:0.12;pointer-events:none;background:radial-gradient(circle at 40% 30%, #ffb86b, transparent 20%) ;transform:translate(-40px,-40px)}
+  .particles{position:absolute;inset:0;pointer-events:none}
+  .particle{position:absolute;width:6px;height:6px;border-radius:50%;background:radial-gradient(circle,#fff,#ffdcb3);opacity:0.06;animation:float 8s linear infinite}
+  @keyframes float {0%{transform:translateY(0)}50%{transform:translateY(-18px)}100%{transform:translateY(0)}}
+  @keyframes coin-tilt {
+    0%{transform:rotateX(0deg) rotateY(0deg)}
+    25%{transform:rotateX(10deg) rotateY(50deg)}
+    50%{transform:rotateX(0deg) rotateY(100deg)}
+    75%{transform:rotateX(-10deg) rotateY(50deg)}
+    100%{transform:rotateX(0deg) rotateY(0deg)}
+  }
+  section{padding:36px 0}
+  .row-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
+  .feature{background:linear-gradient(180deg,#0b0b0c,#070708);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+  .token-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px}
+  .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  .gallery img{width:100%;height:120px;object-fit:cover;border-radius:10px}
+  footer{margin-top:28px;padding:22px 0;color:var(--muted);border-top:1px solid rgba(255,255,255,0.03)}
+  @media (max-width:980px){
+    .hero{grid-template-columns:1fr;gap:18px}
+    nav ul{display:none}
+    .scene{width:360px;height:360px}
+    .coin-wrap{width:220px;height:220px}
+    .gallery{grid-template-columns:repeat(2,1fr)}
+    .row-3{grid-template-columns:1fr}
+    .token-grid{grid-template-columns:1fr}
+  }
+  @media (max-width:520px){
+    .scene{width:300px;height:300px}
+    .coin-wrap{width:190px;height:190px}
+    .hero-left h1{font-size:28px}
+  }
+  .muted{color:var(--muted)}
+  .small{font-size:13px;color:var(--muted)}
+  .center{text-align:center}
+</style>
 </head>
-<body class="bg-slate-950 text-slate-100">
-  <!-- Hero -->
-  <header class="relative isolate overflow-hidden">
-    <div class="absolute inset-0 -z-10 bg-[radial-gradient(1200px_600px_at_50%_-100px,rgba(56,189,248,.35),transparent)]"></div>
-    <div class="max-w-6xl mx-auto px-4 py-14 md:py-20">
-      <div class="grid md:grid-cols-2 gap-10 items-center">
+<body>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#">
+        <div class="logo">
+          <img src="logo.jpg" alt="Notey Logo">
+        </div>
         <div>
-          $1CapCut Template • 4picsintro$2
-          <h1 class="mt-4 text-4xl md:text-6xl font-extrabold leading-tight">
-            Make your edit in <span class="text-sky-400">one tap</span>
-          </h1>
-          <p class="mt-4 text-slate-300 max-w-prose">Preview the style below, then open it directly in CapCut. Works on iOS, Android, and web. Replace the placeholders with your clips in seconds.</p><div class="mt-6 flex flex-wrap gap-3">
-        <a id="useTemplateBtn" href="#" class="group inline-flex items-center gap-2 rounded-2xl bg-sky-500 hover:bg-sky-400 text-slate-900 font-semibold px-5 py-3 transition">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M3 5a2 2 0 0 1 2-2h7a1 1 0 1 1 0 2H5v14h14v-7a1 1 0 1 1 2 0v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5Z"/><path d="M21 3a1 1 0 0 0-1-1h-6a1 1 0 1 0 0 2h3.586L9.293 11.293a1 1 0 1 0 1.414 1.414L19 5.414V9a1 1 0 1 0 2 0V3Z"/></svg>
-          Use template</a>
-        <button id="openAppBtn" class="inline-flex items-center gap-2 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/10 font-semibold px-5 py-3">
-          Open in CapCut app
-        </button>
-        <button id="copyLinkBtn" class="inline-flex items-center gap-2 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/10 font-medium px-5 py-3">Copy link</button>
-      </div>
-
-      <div id="copiedToast" class="hidden mt-3 text-sm text-emerald-300">Link copied! Share it with your friends ✨</div>
-
-      <div class="mt-6 flex items-center gap-4 text-xs text-slate-400">
-        <div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> Mobile & desktop</div>
-        <div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-sky-400"></span> 4K ready</div>
-        <div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-fuchsia-400"></span> Free to use</div>
-      </div>
-    </div>
-
-    <!-- Video preview card -->
-    <div class="bg-white/5 border border-white/10 rounded-3xl p-3 md:p-4 shadow-2xl">
-      <div class="aspect-[9/16] rounded-2xl overflow-hidden relative">
-        <video id="preview" class="w-full h-full object-cover" poster="VIDEO_POSTER.jpg" preload="metadata" playsinline>
-          <source src="PREVIEW_VIDEO.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        <button id="playBtn" class="absolute inset-0 grid place-items-center group">
-          <span class="inline-grid place-items-center w-16 h-16 rounded-full bg-white/20 backdrop-blur ring-1 ring-white/30 group-hover:scale-105 transition">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="w-7 h-7"><path d="M8 5v14l11-7L8 5z"/></svg>
-          </span>
-        </button>
-      </div>
-      <div class="px-2 pt-3">
-        <div class="flex items-center justify-between text-xs text-slate-400">
-          <span>Preview • 9:16</span>
-          <a href="#how" class="hover:text-sky-300">How it works</a>
+          <div style="font-weight:800">Notey Bear</div>
+          <div class="small">Solana Token</div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-  </header>  <!-- Highlights -->  <section class="max-w-6xl mx-auto px-4 py-12" id="features">
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      <div class="rounded-2xl bg-white/5 border border-white/10 p-5">
-        <h3 class="font-semibold">Auto-beat sync</h3>
-        <p class="mt-2 text-sm text-slate-300">Clips snap to the music markers for smooth rhythm transitions.</p>
-      </div>
-      <div class="rounded-2xl bg-white/5 border border-white/10 p-5">
-        <h3 class="font-semibold">Text presets</h3>
-        <p class="mt-2 text-sm text-slate-300">Bold captions with shadows and gradient fills—just edit the text.</p>
-      </div>
-      <div class="rounded-2xl bg-white/5 border border-white/10 p-5">
-        <h3 class="font-semibold">Color look</h3>
-        <p class="mt-2 text-sm text-slate-300">Warm cinematic LUT baked in; adjustable intensity slider.</p>
-      </div>
-      <div class="rounded-2xl bg-white/5 border border-white/10 p-5">
-        <h3 class="font-semibold">Export presets</h3>
-        <p class="mt-2 text-sm text-slate-300">1080p and 4K profiles with high bitrate and frame blending.</p>
-      </div>
-    </div>
-  </section>  <!-- Before/After -->  <section class="max-w-6xl mx-auto px-4 py-12">
-    <div class="grid md:grid-cols-2 gap-8 items-center">
-      <div>
-        <h2 class="text-2xl md:text-3xl font-bold">Style preview: before / after</h2>
-        <p class="mt-2 text-slate-300">Drag the handle to compare the raw clip with the graded, motion-blurred output you'll get from this template.</p>
-      </div>
-      <div class="ba-wrap shadow-xl">
-        <img src="before.jpg" alt="Before" class="ba-img" loading="lazy">
-        <div id="baTop" class="ba-top">
-          <img src="after.jpg" alt="After" class="ba-img" loading="lazy">
-        </div>
-        <div class="ba-handle"></div>
-        <div class="ba-dot"></div>
-        <input id="baRange" type="range" min="0" max="100" value="50" class="absolute bottom-3 left-1/2 -translate-x-1/2 w-[80%] h-1 bg-white/20 accent-sky-400 rounded-full" aria-label="Before/after slider"/>
-      </div>
-    </div>
-  </section>  <!-- How it works -->  <section id="how" class="max-w-6xl mx-auto px-4 py-12">
-    <h2 class="text-2xl md:text-3xl font-bold">How to use</h2>
-    <ol class="mt-6 space-y-4">
-      <li class="flex gap-3">
-        <span class="flex-none w-8 h-8 rounded-full bg-sky-500 text-slate-900 grid place-items-center font-bold">1</span>
-        <div>
-          <p class="font-semibold">Tap <em>Use template</em>.</p>
-          <p class="text-slate-300 text-sm">On mobile it opens the CapCut app. On desktop it opens CapCut web.</p>
-        </div>
-      </li>
-      <li class="flex gap-3">
-        <span class="flex-none w-8 h-8 rounded-full bg-sky-500 text-slate-900 grid place-items-center font-bold">2</span>
-        <div>
-          <p class="font-semibold">Replace placeholders with your clips/photos.</p>
-          <p class="text-slate-300 text-sm">Keep similar durations for best beat sync.</p>
-        </div>
-      </li>
-      <li class="flex gap-3">
-        <span class="flex-none w-8 h-8 rounded-full bg-sky-500 text-slate-900 grid place-items-center font-bold">3</span>
-        <div>
-          <p class="font-semibold">Export in 1080p or 4K and post.</p>
-          <p class="text-slate-300 text-sm">Use the tags below to get featured.</p>
-        </div>
-      </li>
-    </ol><div class="mt-8 grid md:grid-cols-2 gap-6">
-  <div class="rounded-2xl bg-white/5 border border-white/10 p-4">
-    <h3 class="font-semibold">Template info</h3>
-    <dl class="mt-3 grid grid-cols-2 gap-2 text-sm text-slate-300">
-      <div><dt class="text-slate-400">Aspect</dt><dd>9:16 (vertical)</dd></div>
-      $1 4 $3
-      <div><dt class="text-slate-400">Music</dt><dd id="musicCredit">MUSIC_TITLE – ARTIST</dd></div>
-      <div><dt class="text-slate-400">Effects</dt><dd>Beat cuts, Motion blur, Film grain</dd></div>
-    </dl>
-  </div>
-  <div class="rounded-2xl bg-white/5 border border-white/10 p-4">
-    <h3 class="font-semibold">Hashtags</h3>
-    <div id="tags" class="mt-3 flex flex-wrap gap-2 text-xs">
-      <span class="px-3 py-1 rounded-full bg-white/10 border border-white/10">#CapCut</span>
-      <span class="px-3 py-1 rounded-full bg-white/10 border border-white/10">#Template</span>
-      <span class="px-3 py-1 rounded-full bg-white/10 border border-white/10">#Edit</span>
-      <span class="px-3 py-1 rounded-full bg-white/10 border border-white/10">#Viral</span>
-    </div>
-  </div>
-</div>
-
-  </section>  <!-- Gallery -->  <section class="max-w-6xl mx-auto px-4 py-12">
-    <h2 class="text-2xl md:text-3xl font-bold">Example looks</h2>
-    <div class="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
-      <img class="rounded-xl aspect-square object-cover" src="thumb1.jpg" alt="Example 1" loading="lazy" />
-      <img class="rounded-xl aspect-square object-cover" src="thumb2.jpg" alt="Example 2" loading="lazy" />
-      <img class="rounded-xl aspect-square object-cover" src="thumb3.jpg" alt="Example 3" loading="lazy" />
-      <img class="rounded-xl aspect-square object-cover" src="thumb4.jpg" alt="Example 4" loading="lazy" />
-      <img class="rounded-xl aspect-square object-cover" src="thumb5.jpg" alt="Example 5" loading="lazy" />
-      <img class="rounded-xl aspect-square object-cover" src="thumb6.jpg" alt="Example 6" loading="lazy" />
-    </div>
-  </section>  <!-- FAQ -->  <section class="max-w-6xl mx-auto px-4 py-12">
-    <h2 class="text-2xl md:text-3xl font-bold">FAQ</h2>
-    <div class="mt-6 space-y-4">
-      <details class="rounded-xl bg-white/5 border border-white/10 p-4">
-        <summary class="font-semibold cursor-pointer">It says “Template not found”.</summary>
-        <p class="mt-2 text-sm text-slate-300">The link may be private or expired. Ask the creator for a fresh link or try again later.</p>
-      </details>
-      <details class="rounded-xl bg-white/5 border border-white/10 p-4">
-        <summary class="font-semibold cursor-pointer">The app didn’t open on my phone.</summary>
-        <p class="mt-2 text-sm text-slate-300">Tap <em>Open in CapCut app</em>. If it still doesn’t open, update CapCut from the App Store / Play Store and try again.</p>
-      </details>
-      <details class="rounded-xl bg-white/5 border border-white/10 p-4">
-        <summary class="font-semibold cursor-pointer">Can I change the music?</summary>
-        <p class="mt-2 text-sm text-slate-300">Yes—swap music in CapCut and re-align the beat markers. Make sure you have rights to use the track.</p>
-      </details>
-    </div>
-  </section>  <!-- Sticky CTA -->  <div class="sticky bottom-3 z-50">
-    <div class="max-w-fit mx-auto">
-      <a id="useTemplateBtn2" href="#" class="inline-flex items-center gap-2 rounded-full px-6 py-3 bg-sky-500 text-slate-900 font-semibold shadow-xl hover:bg-sky-400 border border-sky-300/50">
-        Use this CapCut template
       </a>
+      <nav>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#tokenomics">Tokenomics</a></li>
+          <li><a href="#roadmap">Roadmap</a></li>
+        </ul>
+      </nav>
     </div>
-  </div>  <footer class="max-w-6xl mx-auto px-4 py-12 text-sm text-slate-400">
-    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-      <div>
-        <p>Made with ❤ for editors. Replace placeholders with your assets.</p>
-        <p class="mt-1">Music credit: <span id="musicCredit2">MUSIC_TITLE – ARTIST</span></p>
+  </header>
+
+  <main class="wrap">
+    <!-- HERO -->
+    <section class="hero" aria-label="Hero">
+      <div class="hero-left">
+        <h1>NOTEY BEAR — Community Token on Solana</h1>
+        <p class="lead">It represents bringing people
+		together in a fun and rewarding ecosystem to build a strong, supportive community</p>
+        <div class="cta-row">
+          <a class="btn ghost" href="#buy">View Contract</a>
+
+		  
+        </div>
+        
       </div>
-      <div class="flex items-center gap-3">
-        <img class="w-24 h-24 bg-white rounded-xl p-2" alt="QR to template" id="qrImg" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=CAPCUT_TEMPLATE_LINK"/>
+      <div class="hero-right">
+        <div class="halo"></div>
+        <div class="scene">
+          <div class="particles"></div>
+          <div class="coin-wrap">
+            <div class="coin">
+              <img id="coinImg" src="logo.jpg" alt="NOTEY coin">
+            </div>
+          </div>
+        </div>
       </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div style="background:linear-gradient(180deg,#070708,#0b0b0d);padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)">
+        <h2>What is Notey?</h2>
+        <p class="small">Notey is a Solana-based community token inspired by the bear — strong, loyal, and social.
+It’s designed to reward holders, enable NFT collectibles, and foster a fun, engaging community.</p>
+        <div class="row-3">
+          <div class="feature"><strong>Community Rewards 🎁
+</strong><div class="small">Earn tokens, airdrops, and special perks by participating in events.</div></div>
+          <div class="feature"><strong>Collectibles</strong><div class="small">Exclusive bear-themed NFTs available for the community, 
+		  collectibles, and events.</div></div>
+          <div class="feature"><strong>Strong Community</strong><div class="small">Built around a loyal and engaged group of supporters,
+		  creating a friendly and active ecosystem.</div></div>
+        </div>
+      </div>
+    </section>
+
+   <!-- TOKENOMICS CHART -->
+<section id="tokenomics">
+  <div style="background:linear-gradient(180deg,#070708,#0b0b0d);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);margin-top:24px">
+    <h2>Tokenomics — Notey Bear </h2>
+    <div class="token-chart" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:16px;">
+      
+      <div class="token-slice" style="flex:1;min-width:120px;text-align:center;cursor:pointer;">
+        <div class="slice-bar" style="background:linear-gradient(135deg,#f97316,#ffb454);border-radius:12px;padding:16px;font-weight:800;">40%</div>
+        <div class="small" style="margin-top:6px">Community Rewards</div>
+      </div>
+
+      <div class="token-slice" style="flex:1;min-width:120px;text-align:center;cursor:pointer;">
+        <div class="slice-bar" style="background:linear-gradient(135deg,#10b981,#3b82f6);border-radius:12px;padding:16px;font-weight:800;">25%</div>
+        <div class="small" style="margin-top:6px">Liquidity Pool</div>
+      </div>
+
+      <div class="token-slice" style="flex:1;min-width:120px;text-align:center;cursor:pointer;">
+        <div class="slice-bar" style="background:linear-gradient(135deg,#8b5cf6,#ec4899);border-radius:12px;padding:16px;font-weight:800;">20%</div>
+        <div class="small" style="margin-top:6px">Team & Ops</div>
+      </div>
+
+      <div class="token-slice" style="flex:1;min-width:120px;text-align:center;cursor:pointer;">
+        <div class="slice-bar" style="background:linear-gradient(135deg,#facc15,#f97316);border-radius:12px;padding:16px;font-weight:800;">15%</div>
+        <div class="small" style="margin-top:6px">Treasury</div>
+      </div>
+
     </div>
-  </footer>  <script>
-    // ======= CONFIG – Replace these with your real links & info =======
-    const CAPCUT_WEB_LINK = 'https://www.capcut.com/tv2/ZSS329UFy/'; // public template URL
-    const CAPCUT_DEEP_LINK = 'https://www.capcut.com/tv2/ZSS329UFy/'; // deep link for app
-    const MUSIC_TITLE = '4picsintro – CapCut Template';
-    const HASHTAGS = ['#CapCut', '#CapCutTemplate', '#4picsintro', '#Edit', '#Viral'];
-    // ================================================================
+  </div>
+</section>
 
-    // Set dynamic content
-    const useBtns = [document.getElementById('useTemplateBtn'), document.getElementById('useTemplateBtn2')];
-    useBtns.forEach(btn => btn.setAttribute('href', CAPCUT_WEB_LINK));
+<style>
+  .slice-bar {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
 
-    document.getElementById('openAppBtn').addEventListener('click', () => {
-      // Try deep link first; if it fails (desktop), fall back to web
-      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-      if (isMobile) {
-        window.location.href = CAPCUT_DEEP_LINK;
-        setTimeout(() => { window.location.href = CAPCUT_WEB_LINK; }, 900);
-      } else {
-        window.location.href = CAPCUT_WEB_LINK;
-      }
+  .slice-bar.active {
+    transform: scale(1.15);
+    box-shadow: 0 10px 30px rgba(255,255,255,0.3);
+  }
+</style>
+
+<script>
+  // Add click animation to tokenomics slices
+  const slices = document.querySelectorAll('.slice-bar');
+  slices.forEach(slice => {
+    slice.addEventListener('click', () => {
+      // Remove active class from others
+      slices.forEach(s => s.classList.remove('active'));
+      // Add active class to clicked slice
+      slice.classList.add('active');
     });
+  });
+</script>
 
-    document.getElementById('copyLinkBtn').addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText(CAPCUT_WEB_LINK);
-        document.getElementById('copiedToast').classList.remove('hidden');
-        setTimeout(()=>document.getElementById('copiedToast').classList.add('hidden'), 2200);
-      } catch (e) { alert('Copy failed. Link: '+ CAPCUT_WEB_LINK); }
+
+    <!-- ROADMAP -->
+<section id="roadmap">
+  <div style="background:linear-gradient(180deg,#070708,#0b0b0d);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)">
+    <h2>Roadmap — Notey Bear </h2>
+    <div class="roadmap-grid" style="margin-top:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px">
+      
+      <div class="roadmap-card">
+        <strong>Phase 1 — Community Launch</strong>
+        <ul class="small" style="margin-top:8px;padding-left:16px;line-height:1.5">
+          <li>Introduce Notey Bear token on Solana</li>
+          <li>Launch website and official social channels</li>
+        </ul>
+      </div>
+      
+      <div class="roadmap-card">
+        <strong>Phase 2 — Ecosystem Growth</strong>
+        <ul class="small" style="margin-top:8px;padding-left:16px;line-height:1.5">
+          <li>Expand community engagement and partnerships</li>
+          <li>Launch staking and reward programs for holders</li>
+          
+        </ul>
+      </div>
+
+      <div class="roadmap-card">
+        <strong>Phase 3 — Governance & Rewards</strong>
+        <ul class="small" style="margin-top:8px;padding-left:16px;line-height:1.5">
+          <li>Enable community voting and governance</li>
+          <li>Distribute rewards and airdrops for active participants</li>
+          <li>Host community events and challenges</li>
+        </ul>
+      </div>
+
+      <div class="roadmap-card">
+        <strong>Phase 4 — Expansion & Sustainability</strong>
+        <ul class="small" style="margin-top:8px;padding-left:16px;line-height:1.5">
+          <li>Build long-term ecosystem for holders</li>
+          <li>Launch collaborations with other Solana projects</li>
+          <li>Continue NFT releases, community perks, and ecosystem upgrades</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Roadmap Card Animation */
+  .roadmap-card {
+    padding:14px;
+    border-radius:12px;
+    background:#080808;
+    border:1px solid rgba(255,255,255,0.02);
+    opacity:0;
+    transform: translateY(30px);
+    animation:fadeUp 0.8s forwards;
+  }
+
+  /* Animate each card with delay */
+  .roadmap-card:nth-child(1){animation-delay:0.1s;}
+  .roadmap-card:nth-child(2){animation-delay:0.3s;}
+  .roadmap-card:nth-child(3){animation-delay:0.5s;}
+  .roadmap-card:nth-child(4){animation-delay:0.7s;}
+
+  @keyframes fadeUp {
+    0% {opacity:0; transform:translateY(30px);}
+    100% {opacity:1; transform:translateY(0);}
+  }
+</style>
+
+
+    <!-- BUY -->
+    <section id="buy">
+      <div style="background:linear-gradient(180deg,#070708,#0b0b0d);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap">
+        <div>
+          
+		  <h4>CONTRACT ADDRESS</h4>
+          <div style="text-align:center; margin-top:20px;">
+  <h2 style="font-size:48px; font-weight:800; word-break:break-all;">
+    <span id="contractAddress">kdiiuydutuyydytwduqwyioip</span>
+  </h2>
+  <button 
+    onclick="copyAddress()" 
+    style="margin-top:10px; padding:10px 20px; font-weight:600; border-radius:8px; background:linear-gradient(90deg,#f97316,#ffb454); color:#050505; border:none; cursor:pointer;">
+    Copy
+  </button>
+</div>
+
+<script>
+  function copyAddress() {
+    const address = document.getElementById('contractAddress').textContent;
+    navigator.clipboard.writeText(address).then(() => {
+      alert('Contract address copied!');
     });
+  }
+</script>
 
-    // Music & tags
-    document.getElementById('musicCredit').textContent = MUSIC_TITLE;
-    document.getElementById('musicCredit2').textContent = MUSIC_TITLE;
-    const tagsWrap = document.getElementById('tags');
-    tagsWrap.innerHTML = '';
-    HASHTAGS.forEach(t => {
-      const span = document.createElement('span');
-      span.className = 'px-3 py-1 rounded-full bg-white/10 border border-white/10';
-      span.textContent = t;
-      tagsWrap.appendChild(span);
-    });
+        </div>
+        <div style="display:flex;gap:10px">
+        
+        </div>
+      </div>
+    </section>
 
-    // Update QR
-    const qr = document.getElementById('qrImg');
-    qr.src = https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(CAPCUT_WEB_LINK)};
+    <footer>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div>
+          <div style="font-weight:800">NOTEY Official</div>
+          <div class="small">© <span id="year"></span> All rights reserved.</div>
+        </div>
+<div class="small" style="display:flex;gap:24px;align-items:center;margin-top:10px;">
+  Follow us:
 
-    // Video play overlay
-    const video = document.getElementById('preview');
-    const playBtn = document.getElementById('playBtn');
-    playBtn.addEventListener('click', () => { video.play(); playBtn.classList.add('hidden'); });
-    video.addEventListener('pause', () => playBtn.classList.remove('hidden'));
+  <!-- X Logo -->
+  <a href="https://x.com/NOTEYBEAR" target="_blank" style="display:flex;align-items:center;gap:6px;text-decoration:none;font-weight:600;">
+    <img src="X.png" alt="X Logo" style="width:24px;height:24px;">
+    
+  </a>
 
-    // Before/After slider logic
-    const baTop = document.getElementById('baTop');
-    const baRange = document.getElementById('baRange');
-    const updateBA = () => {
-      const pct = +baRange.value; // 0..100
-      baTop.style.width = pct + '%';
-    };
-    baRange.addEventListener('input', updateBA);
-    updateBA();
+  <!-- Telegram Logo -->
+  <a href="https://t.me/Noteybear" target="_blank" style="display:flex;align-items:center;gap:6px;text-decoration:none;font-weight:600;">
+    <img src="TEL.png" alt="Telegram Logo" style="width:24px;height:24px;">
+    Telegram
+  </a>
+</div>
 
-    // Accessibility: keyboard toggle for play
-    video.addEventListener('click', ()=> video.paused ? video.play() : video.pause());
-  </script></body>
+<style>
+  /* Hover effect */
+  a:hover img {
+    filter: drop-shadow(0 0 8px var(--accent));
+    transform: scale(1.1);
+    transition: transform 0.2s, filter 0.2s;
+  }
+</style>
+      </div>
+    </footer>
+  </main>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  document.getElementById('mc').textContent = '$' + (Math.floor(Math.random()*8000000)+120000).toLocaleString();
+  document.getElementById('holders').textContent = (Math.floor(Math.random()*9000)+120).toLocaleString();
+  document.getElementById('price').textContent = '$' + (Math.random()*0.4 + 0.001).toFixed(5);
+
+  (function makeParticles(){
+    const container = document.querySelector('.particles');
+    const n = 18;
+    for(let i=0;i<n;i++){
+      const el = document.createElement('div');
+      el.className = 'particle';
+      el.style.left = Math.random()*100 + '%';
+      el.style.top = Math.random()*100 + '%';
+      const size = 4 + Math.random()*8;
+      el.style.width = size + 'px';
+      el.style.height = size + 'px';
+      el.style.opacity = 0.03 + Math.random()*0.12;
+      el.style.animationDelay = (Math.random()*6) + 's';
+      el.style.animationDuration = (6 + Math.random()*8)+'s';
+      container.appendChild(el);
+    }
+  })();
+</script>
+</body>
 </html>
-
