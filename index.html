@@ -1,52 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hemant Pokhrel | Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hemant Pokhrel | Portfolio</title>
 
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#081b29;
+    color:white;
+}
+
+header{
+    width:100%;
+    position:fixed;
+    top:0;
+    left:0;
+    padding:20px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#06141f;
+    z-index:1000;
+}
+
+.logo{
+    font-size:30px;
+    color:#00abf0;
+    font-weight:bold;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin-left:30px;
+    font-size:18px;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:#00abf0;
+}
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:120px 8%;
+    flex-wrap:wrap;
+}
+
+.hero-text{
+    max-width:600px;
+}
+
+.hero-text h3{
+    font-size:30px;
+}
+
+.hero-text h1{
+    font-size:60px;
+    color:#00abf0;
+    margin:10px 0;
+}
+
+.hero-text h2{
+    font-size:35px;
+    margin-bottom:20px;
+}
+
+.hero-text p{
+    font-size:18px;
+    line-height:1.8;
+    margin-bottom:30px;
+}
+
+.btn{
+    display:inline-block;
+    padding:15px 35px;
+    background:#00abf0;
+    color:#081b29;
+    text-decoration:none;
+    border-radius:30px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.btn:hover{
+    background:white;
+}
+
+.hero-img img{
+    width:350px;
+    height:350px;
+    object-fit:cover;
+    border-radius:50%;
+    border:8px solid #00abf0;
+    box-shadow:0 0 30px #00abf0;
+}
+
+.social{
+    margin-top:30px;
+}
+
+.social a{
+    width:45px;
+    height:45px;
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    border:2px solid #00abf0;
+    border-radius:50%;
+    margin-right:15px;
+    color:#00abf0;
+    text-decoration:none;
+    transition:.3s;
+    font-size:20px;
+}
+
+.social a:hover{
+    background:#00abf0;
+    color:#081b29;
+}
+
+section{
+    padding:80px 8%;
+}
+
+h2{
+    text-align:center;
+    color:#00abf0;
+    margin-bottom:30px;
+    font-size:40px;
+}
+
+.about p{
+    max-width:900px;
+    margin:auto;
+    text-align:center;
+    line-height:1.8;
+    font-size:18px;
+}
+
+form{
+    max-width:600px;
+    margin:auto;
+}
+
+input,
+textarea{
+    width:100%;
+    padding:15px;
+    margin-bottom:20px;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    background:#00abf0;
+    color:#081b29;
+    font-size:18px;
+    font-weight:bold;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:white;
+}
+
+footer{
+    background:#06141f;
+    padding:20px;
+    text-align:center;
+}
+
+@media(max-width:900px){
+
+.hero{
+    flex-direction:column-reverse;
+    text-align:center;
+}
+
+.hero-img img{
+    width:250px;
+    height:250px;
+    margin-bottom:40px;
+}
+
+.hero-text h1{
+    font-size:45px;
+}
+
+nav{
+    display:none;
+}
+
+}
+</style>
+
 </head>
 <body>
 
 <header>
-    <div class="logo">Hemant Pokhrel</div>
 
-    <nav>
-        <a href="#">Home</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-    </nav>
+<div class="logo">Hemant Pokhrel</div>
+
+<nav>
+<a href="#">Home</a>
+<a href="#about">About</a>
+<a href="#contact">Contact</a>
+</nav>
+
 </header>
 
 <section class="hero">
 
-    <div class="content">
-        <h3>Hello, I'm</h3>
-        <h1>Hemant Pokhrel</h1>
-        <h2>Student & Learner</h2>
+<div class="hero-text">
 
-        <p>
-            I enjoy coding, reading, writing and gaming.
-            I love learning new technologies and building
-            beautiful websites.
-        </p>
+<h3>Hello, I'm</h3>
 
-        <a href="#contact" class="btn">Contact Me</a>
+<h1>Hemant Pokhrel</h1>
 
-        <div class="social">
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-x-twitter"></i></a>
-            <a href="#"><i class="fab fa-telegram"></i></a>
-        </div>
-    </div>
+<h2>Student & Learner</h2>
 
-    <div class="image">
-        <img src="sso1.png" alt="Hemant">
-    </div>
+<p>
+I enjoy coding, gaming, reading and writing.
+I love learning new skills and creating beautiful websites.
+</p>
+
+<a href="#contact" class="btn">Hire Me</a>
+
+<div class="social">
+
+<a href="https://www.facebook.com/profile.php?id=100070802662055"><i class="fab fa-facebook-f"></i></a>
+
+<a href="https://www.instagram.com/hemant_pokharel25/"><i class="fab fa-instagram"></i></a>
+
+<a href="https://x.com/Hemant2062"><i class="fab fa-x-twitter"></i></a>
+
+<a href="https://t.me/hemantpokhrel25"><i class="fab fa-telegram"></i></a>
+
+</div>
+
+</div>
+
+<div class="hero-img">
+
+<img src="sso1.png" alt="Hemant">
+
+</div>
 
 </section>
 
@@ -55,10 +273,10 @@
 <h2>About Me</h2>
 
 <p>
-Hello! I'm Hemant Pokhrel. I enjoy programming,
-gaming, reading books and learning new skills.
-I always try to improve myself every day and
-create amazing projects.
+Hello! I'm Hemant Pokhrel, a passionate student who enjoys
+technology, programming, gaming, reading and writing.
+I believe that learning never stops, and every day is
+a chance to improve my skills and create something amazing.
 </p>
 
 </section>
@@ -69,222 +287,30 @@ create amazing projects.
 
 <form>
 
-<input type="text" placeholder="Your Name">
+<input type="text" placeholder="Your Name" required>
 
-<input type="email" placeholder="Your Email">
+<input type="email" placeholder="Your Email" required>
 
-<textarea rows="5" placeholder="Your Message"></textarea>
+<textarea rows="6" placeholder="Your Message"></textarea>
 
-<button>Send Message</button>
+<button type="submit">Send Message</button>
 
 </form>
 
 </section>
 
 <footer>
-<p>© 2026 Hemant Pokhrel. All Rights Reserved.</p>
+
+<p>© 2026 Hemant Pokhrel | All Rights Reserved</p>
+
 </footer>
+
+<script>
+document.querySelector("form").addEventListener("submit",function(e){
+    e.preventDefault();
+    alert("Thank you! Your message has been received.");
+});
+</script>
 
 </body>
 </html>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,Helvetica,sans-serif;
-}
-
-body{
-background:#0f172a;
-color:white;
-}
-
-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 8%;
-background:#111827;
-position:sticky;
-top:0;
-}
-
-.logo{
-font-size:28px;
-font-weight:bold;
-color:#38bdf8;
-}
-
-nav a{
-color:white;
-text-decoration:none;
-margin-left:25px;
-transition:.3s;
-}
-
-nav a:hover{
-color:#38bdf8;
-}
-
-.hero{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:80px 8%;
-flex-wrap:wrap;
-}
-
-.content{
-max-width:600px;
-}
-
-.content h3{
-font-size:28px;
-}
-
-.content h1{
-font-size:60px;
-margin:10px 0;
-color:#38bdf8;
-}
-
-.content h2{
-font-size:35px;
-margin-bottom:20px;
-}
-
-.content p{
-font-size:18px;
-line-height:1.7;
-margin-bottom:30px;
-}
-
-.btn{
-display:inline-block;
-padding:12px 30px;
-background:#38bdf8;
-color:#000;
-text-decoration:none;
-border-radius:30px;
-font-weight:bold;
-transition:.3s;
-}
-
-.btn:hover{
-background:white;
-}
-
-.image img{
-width:380px;
-border-radius:50%;
-border:8px solid #38bdf8;
-box-shadow:0 0 40px #38bdf8;
-}
-
-.social{
-margin-top:30px;
-}
-
-.social a{
-display:inline-flex;
-width:45px;
-height:45px;
-justify-content:center;
-align-items:center;
-border:2px solid #38bdf8;
-border-radius:50%;
-color:#38bdf8;
-margin-right:15px;
-text-decoration:none;
-font-size:20px;
-transition:.3s;
-}
-
-.social a:hover{
-background:#38bdf8;
-color:black;
-}
-
-.about{
-padding:80px 8%;
-text-align:center;
-background:#1e293b;
-}
-
-.about h2{
-font-size:45px;
-margin-bottom:25px;
-}
-
-.about p{
-max-width:800px;
-margin:auto;
-font-size:18px;
-line-height:1.8;
-}
-
-#contact{
-padding:80px 8%;
-text-align:center;
-}
-
-#contact h2{
-font-size:40px;
-margin-bottom:30px;
-}
-
-form{
-max-width:600px;
-margin:auto;
-display:flex;
-flex-direction:column;
-gap:20px;
-}
-
-input,textarea{
-padding:15px;
-border:none;
-outline:none;
-border-radius:8px;
-font-size:16px;
-}
-
-button{
-padding:15px;
-background:#38bdf8;
-border:none;
-border-radius:8px;
-font-size:18px;
-font-weight:bold;
-cursor:pointer;
-}
-
-button:hover{
-background:white;
-}
-
-footer{
-background:#111827;
-padding:20px;
-text-align:center;
-margin-top:50px;
-}
-
-@media(max-width:900px){
-
-.hero{
-flex-direction:column;
-text-align:center;
-}
-
-.image img{
-width:280px;
-margin-top:40px;
-}
-
-.content h1{
-font-size:45px;
-}
-
-}
